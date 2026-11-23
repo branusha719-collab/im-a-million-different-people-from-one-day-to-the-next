@@ -1,0 +1,3274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Director's Cut: An Apology for Sudeep</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap">
+<style>
+:root{
+  --bg:#0b0314;
+  --bg2:#160927;
+  --card:rgba(38, 17, 58, 0.94);
+  --card-light:#fff4f8;
+  --ink:#fff5fa;
+  --muted:#d2b8ec;
+  --accent:#ff4f8b;
+  --accent-gold:#ffd35c;
+  --accent-cyan:#42d4f4;
+  --line:#ffb3cc;
+  --shadow:#08020e;
+  --px:"Press Start 2P","Courier New",monospace;
+  --txt:"VT323","Courier New",monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{
+  margin:0;
+  height:100%;
+  overflow:hidden;
+  color:var(--ink);
+  font-family:var(--txt);
+  font-size:1.45rem;
+  background-color:var(--bg);
+}
+
+/* ============================================================
+   CLEAN ATMOSPHERIC CINEMA SKY WITH TWINKLING RETRO STARS
+   ============================================================ */
+#cinemaBg{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
+  background:radial-gradient(ellipse at 50% 25%, #220938 0%, #130421 65%, #0b0213 100%);
+}
+
+.sky-stars{
+  position:absolute;
+  inset:0;
+  background-image:
+    /* Graceful 4-point sparkle stars scattered in open sky */
+    radial-gradient(2px 2px at 14% 16%, #ffd35c 100%, transparent),
+    radial-gradient(1px 7px at 14% 16%, #ffd35c 100%, transparent),
+    radial-gradient(7px 1px at 14% 16%, #ffd35c 100%, transparent),
+
+    radial-gradient(2px 2px at 82% 20%, #ffd35c 100%, transparent),
+    radial-gradient(1px 7px at 82% 20%, #ffd35c 100%, transparent),
+    radial-gradient(7px 1px at 82% 20%, #ffd35c 100%, transparent),
+
+    radial-gradient(1.5px 1.5px at 34% 28%, #ffffff 100%, transparent),
+    radial-gradient(1px 6px at 34% 28%, rgba(255,255,255,0.85) 100%, transparent),
+    radial-gradient(6px 1px at 34% 28%, rgba(255,255,255,0.85) 100%, transparent),
+
+    radial-gradient(2px 2px at 68% 30%, #ffd35c 100%, transparent),
+    radial-gradient(1px 6px at 68% 30%, #ffd35c 100%, transparent),
+    radial-gradient(6px 1px at 68% 30%, #ffd35c 100%, transparent),
+
+    radial-gradient(1.5px 1.5px at 22% 52%, #ffd35c 100%, transparent),
+    radial-gradient(1px 5px at 22% 52%, rgba(255,211,92,0.8) 100%, transparent),
+    radial-gradient(5px 1px at 22% 52%, rgba(255,211,92,0.8) 100%, transparent),
+
+    radial-gradient(1.5px 1.5px at 76% 56%, #ffd35c 100%, transparent),
+    radial-gradient(1px 5px at 76% 56%, rgba(255,211,92,0.8) 100%, transparent),
+    radial-gradient(5px 1px at 76% 56%, rgba(255,211,92,0.8) 100%, transparent),
+
+    /* Crisp natural pixel dot stars */
+    radial-gradient(2px 2px at 6% 26%, #ffffff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 25% 10%, #ffd35c 100%, transparent),
+    radial-gradient(2px 2px at 45% 14%, #ffffff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 58% 18%, #ff8eb2 100%, transparent),
+    radial-gradient(2px 2px at 92% 12%, #ffd35c 100%, transparent),
+    radial-gradient(1.5px 1.5px at 88% 38%, #ffffff 100%, transparent),
+    radial-gradient(2px 2px at 96% 48%, #ffffff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 4% 46%, #ffd35c 100%, transparent),
+    radial-gradient(2px 2px at 16% 36%, #ffffff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 30% 46%, #ff4f8b 100%, transparent),
+    radial-gradient(2px 2px at 40% 60%, #ffd35c 100%, transparent),
+    radial-gradient(1.5px 1.5px at 62% 48%, #ffffff 100%, transparent),
+    radial-gradient(2px 2px at 70% 64%, #ffd35c 100%, transparent),
+    radial-gradient(1.5px 1.5px at 85% 58%, #ff8eb2 100%, transparent),
+    radial-gradient(2px 2px at 10% 68%, #ffffff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 92% 70%, #ffd35c 100%, transparent),
+    radial-gradient(2px 2px at 48% 38%, #ffffff 100%, transparent);
+  background-size:100% 100%;
+  animation:starsTwinkle 3.2s ease-in-out infinite alternate;
+}
+@keyframes starsTwinkle{
+  0%{opacity:0.65}
+  100%{opacity:1}
+}
+
+/* Glowing Pixel Full Moon */
+.pixel-moon{
+  position:absolute;
+  top:22px;
+  right:48px;
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #fffde6 0%, #ffeaa7 45%, #ffd35c 80%, #f39c12 100%);
+  box-shadow:0 0 25px rgba(255, 234, 167, 0.7), 0 0 55px rgba(255, 211, 92, 0.35);
+  z-index:1;
+}
+.moon-crater{
+  position:absolute;
+  border-radius:50%;
+  background:rgba(215, 145, 20, 0.35);
+  box-shadow:inset 1px 1px 2px rgba(160, 90, 10, 0.4);
+}
+.moon-crater.c1{width:14px;height:14px;top:10px;left:16px}
+.moon-crater.c2{width:10px;height:10px;top:28px;left:32px}
+.moon-crater.c3{width:8px;height:8px;top:18px;right:12px}
+.moon-crater.c4{width:6px;height:6px;bottom:12px;left:18px}
+
+/* Floating Pixel Clouds */
+.pixel-cloud{
+  position:absolute;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%2250%22%20viewBox%3D%220%200%20120%2050%22%3E%3Cpath%20d%3D%22M15%2C50%20L105%2C50%20C114%2C50%20120%2C44%20120%2C35%20C120%2C26%20112%2C22%20104%2C22%20C102%2C12%2092%2C6%2080%2C6%20C70%2C6%2062%2C11%2056%2C16%20C50%2C6%2038%2C0%2024%2C0%20C10%2C0%202%2C12%202%2C24%20C0%2C27%200%2C32%204%2C37%20C8%2C45%2015%2C50%2015%2C50%20Z%22%20fill%3D%22%2334154c%22%20opacity%3D%220.7%22/%3E%3Cpath%20d%3D%22M20%2C46%20L100%2C46%20C108%2C46%20114%2C40%20114%2C32%20C114%2C24%20106%2C20%2098%2C20%20C96%2C12%2088%2C8%2078%2C8%20C68%2C8%2060%2C13%2054%2C18%20C48%2C8%2036%2C4%2024%2C4%20C12%2C4%206%2C14%206%2C24%20C4%2C27%204%2C30%208%2C35%20C12%2C42%2020%2C46%2020%2C46%20Z%22%20fill%3D%22%23481d68%22%20opacity%3D%220.9%22/%3E%3C/svg%3E");
+  background-size:contain;
+  background-repeat:no-repeat;
+  z-index:1;
+}
+.cloud-top-left{width:115px;height:48px;top:14%;left:5%;animation:cloudDrift 20s ease-in-out infinite alternate}
+.cloud-top-right{width:130px;height:52px;top:23%;right:11%;animation:cloudDrift 24s ease-in-out infinite alternate-reverse}
+.cloud-mid-left{width:100px;height:42px;top:48%;left:6%;animation:cloudDrift 18s ease-in-out infinite alternate}
+.cloud-mid-right{width:120px;height:48px;top:40%;right:5%;animation:cloudDrift 22s ease-in-out infinite alternate-reverse}
+@keyframes cloudDrift{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(24px)}
+}
+
+/* City Skyline with Lit Windows */
+.city-skyline{
+  position:absolute;
+  bottom:72px;
+  left:0;
+  right:0;
+  height:95px;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22280%22%20height%3D%22100%22%20viewBox%3D%220%200%20280%20100%22%3E%3Cpath%20d%3D%22M0%2C100%20L0%2C38%20L32%2C38%20L32%2C18%20L62%2C18%20L62%2C48%20L76%2C48%20L76%2C28%20L78%2C28%20L78%2C6%20L80%2C6%20L80%2C28%20L82%2C28%20L82%2C48%20L116%2C48%20L116%2C32%20L152%2C32%20L152%2C56%20L178%2C56%20L178%2C22%20L212%2C22%20L212%2C42%20L242%2C42%20L242%2C62%20L280%2C62%20L280%2C100%20Z%22%20fill%3D%22%2316072b%22/%3E%3Crect%20x%3D%228%22%20y%3D%2246%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22%20opacity%3D%220.9%22/%3E%3Crect%20x%3D%2218%22%20y%3D%2246%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22%20opacity%3D%220.7%22/%3E%3Crect%20x%3D%228%22%20y%3D%2262%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%2342d4f4%22%20opacity%3D%220.8%22/%3E%3Crect%20x%3D%2240%22%20y%3D%2226%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22/%3E%3Crect%20x%3D%2250%22%20y%3D%2226%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22%20opacity%3D%220.6%22/%3E%3Crect%20x%3D%2240%22%20y%3D%2240%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%2342d4f4%22%20opacity%3D%220.9%22/%3E%3Crect%20x%3D%2250%22%20y%3D%2240%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22/%3E%3Crect%20x%3D%2292%22%20y%3D%2256%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22/%3E%3Crect%20x%3D%22102%22%20y%3D%2256%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22%20opacity%3D%220.5%22/%3E%3Crect%20x%3D%22126%22%20y%3D%2242%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22/%3E%3Crect%20x%3D%22138%22%20y%3D%2242%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%2342d4f4%22%20opacity%3D%220.8%22/%3E%3Crect%20x%3D%22126%22%20y%3D%2258%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22%20opacity%3D%220.7%22/%3E%3Crect%20x%3D%22186%22%20y%3D%2232%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22/%3E%3Crect%20x%3D%22198%22%20y%3D%2232%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22%20opacity%3D%220.8%22/%3E%3Crect%20x%3D%22186%22%20y%3D%2248%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%2342d4f4%22/%3E%3Crect%20x%3D%22198%22%20y%3D%2248%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22%20opacity%3D%220.6%22/%3E%3Crect%20x%3D%22222%22%20y%3D%2252%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22/%3E%3Crect%20x%3D%22252%22%20y%3D%2272%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%23ffd35c%22%20opacity%3D%220.8%22/%3E%3Crect%20x%3D%22264%22%20y%3D%2272%22%20width%3D%225%22%20height%3D%225%22%20fill%3D%22%2342d4f4%22%20opacity%3D%220.7%22/%3E%3C/svg%3E");
+  background-repeat:repeat-x;
+  background-size:280px 100px;
+  background-position:bottom left;
+  z-index:1;
+}
+
+/* Retro Pixel Grass & Dirt Ground Platform */
+.ground-platform{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:72px;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2264%22%20height%3D%2272%22%20viewBox%3D%220%200%2064%2072%22%3E%3Crect%20width%3D%2264%22%20height%3D%2272%22%20fill%3D%22%23220b33%22/%3E%3Crect%20x%3D%224%22%20y%3D%2226%22%20width%3D%2212%22%20height%3D%228%22%20fill%3D%22%23381552%22%20rx%3D%221%22/%3E%3Crect%20x%3D%2222%22%20y%3D%2240%22%20width%3D%2214%22%20height%3D%2210%22%20fill%3D%22%23180724%22%20rx%3D%221%22/%3E%3Crect%20x%3D%2242%22%20y%3D%2224%22%20width%3D%2216%22%20height%3D%228%22%20fill%3D%22%23381552%22%20rx%3D%221%22/%3E%3Crect%20x%3D%228%22%20y%3D%2254%22%20width%3D%2216%22%20height%3D%2210%22%20fill%3D%22%23301146%22%20rx%3D%221%22/%3E%3Crect%20x%3D%2236%22%20y%3D%2252%22%20width%3D%2212%22%20height%3D%228%22%20fill%3D%22%23180724%22%20rx%3D%221%22/%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%2264%22%20height%3D%2218%22%20fill%3D%22%231c6b27%22/%3E%3Cpath%20d%3D%22M0%2C18%20L4%2C25%20L8%2C18%20L14%2C27%20L20%2C18%20L26%2C25%20L32%2C18%20L38%2C26%20L44%2C18%20L50%2C25%20L56%2C18%20L60%2C26%20L64%2C18%20L64%2C0%20L0%2C0%20Z%22%20fill%3D%22%23268c34%22/%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%2264%22%20height%3D%2210%22%20fill%3D%22%2344cf53%22/%3E%3Cpath%20d%3D%22M0%2C10%20L3%2C15%20L6%2C10%20L12%2C16%20L18%2C10%20L24%2C15%20L30%2C10%20L36%2C16%20L42%2C10%20L48%2C15%20L54%2C10%20L60%2C16%20L64%2C10%20L64%2C0%20L0%2C0%20Z%22%20fill%3D%22%2344cf53%22/%3E%3Cline%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%2264%22%20y2%3D%221%22%20stroke%3D%22%237ef48b%22%20stroke-width%3D%222%22/%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%225%22%20r%3D%221.5%22%20fill%3D%22%23ffd35c%22/%3E%3Ccircle%20cx%3D%2238%22%20cy%3D%225%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22/%3E%3Ccircle%20cx%3D%2252%22%20cy%3D%226%22%20r%3D%221.5%22%20fill%3D%22%23ffd35c%22/%3E%3C/svg%3E");
+  background-repeat:repeat-x;
+  background-size:64px 72px;
+  background-position:bottom left;
+  z-index:1;
+}
+
+/* ============================================================
+   AUTONOMOUS ROAMING PIXEL ACTORS (2D WANDERING IN BACKGROUND)
+   ============================================================ */
+#roamActors{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:1;
+}
+
+.roam-actor{
+  position:absolute;
+  top:0;
+  left:0;
+  will-change:transform;
+  filter:drop-shadow(2px 3px 0 rgba(0,0,0,0.6));
+  pointer-events:auto;
+  cursor:pointer;
+  transition:filter .15s;
+}
+.roam-actor:hover{
+  filter:drop-shadow(0 0 10px var(--accent-gold));
+}
+.actor-body{
+  image-rendering:pixelated;
+  display:block;
+}
+
+/* 1. JAKE GYLLENHAAL (Demolition: Headphone dance walk)
+   Moves in an undulating wave across the screen, drifting up and down */
+#actorJake{
+  animation:jakeRoam 27s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+#actorJake .actor-body{
+  animation:jakeGroove .44s ease-in-out infinite alternate;
+}
+@keyframes jakeGroove{
+  0%{transform:translateY(0) rotate(-3deg)}
+  100%{transform:translateY(-7px) rotate(3deg)}
+}
+@keyframes jakeRoam{
+  0%   { transform: translate(-90px, 32vh) scaleX(1); }
+  18%  { transform: translate(18vw, 15vh) scaleX(1); }
+  38%  { transform: translate(50vw, 52vh) scaleX(1); }
+  58%  { transform: translate(78vw, 24vh) scaleX(1); }
+  78%  { transform: translate(calc(100vw + 50px), 42vh) scaleX(1); }
+  78.1%{ transform: translate(calc(100vw + 50px), 42vh) scaleX(-1); }
+  86%  { transform: translate(72vw, 68vh) scaleX(-1); }
+  94%  { transform: translate(25vw, 62vh) scaleX(-1); }
+  100% { transform: translate(-90px, 32vh) scaleX(-1); }
+}
+
+/* 2. TOM HARDY (Legend: Holding bouquet of flowers for Sudeep)
+   Strolls gently along the lower margins, stepping up and down */
+#actorHardy{
+  animation:hardyRoam 32s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+}
+#actorHardy .actor-body{
+  animation:hardySway .6s ease-in-out infinite alternate;
+}
+@keyframes hardySway{
+  0%{transform:translateY(0) rotate(1.5deg)}
+  100%{transform:translateY(-6px) rotate(-2deg)}
+}
+@keyframes hardyRoam{
+  0%   { transform: translate(calc(100vw + 80px), 68vh) scaleX(-1); }
+  22%  { transform: translate(78vw, 76vh) scaleX(-1); }
+  45%  { transform: translate(36vw, 84vh) scaleX(-1); }
+  65%  { transform: translate(12vw, 54vh) scaleX(-1); }
+  76%  { transform: translate(-80px, 62vh) scaleX(-1); }
+  76.1%{ transform: translate(-80px, 62vh) scaleX(1); }
+  85%  { transform: translate(32vw, 75vh) scaleX(1); }
+  94%  { transform: translate(82vw, 62vh) scaleX(1); }
+  100% { transform: translate(calc(100vw + 80px), 68vh) scaleX(1); }
+}
+
+/* 3. CHRISTIAN BALE (Patrick Bateman: Paces along left & upper flank)
+   Walks briskly with sharp suit and business card */
+#actorBale{
+  animation:baleRoam 30s ease-in-out infinite;
+}
+#actorBale .actor-body{
+  animation:baleStrut .48s steps(2) infinite;
+}
+@keyframes baleStrut{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+  100%{transform:translateY(0)}
+}
+@keyframes baleRoam{
+  0%   { transform: translate(7vw, -90px) scaleX(1); }
+  18%  { transform: translate(9vw, 24vh) scaleX(1); }
+  38%  { transform: translate(6vw, 68vh) scaleX(1); }
+  50%  { transform: translate(14vw, 82vh) scaleX(1); }
+  50.1%{ transform: translate(14vw, 82vh) scaleX(-1); }
+  68%  { transform: translate(8vw, 44vh) scaleX(-1); }
+  85%  { transform: translate(15vw, 14vh) scaleX(-1); }
+  100% { transform: translate(7vw, -90px) scaleX(-1); }
+}
+
+/* 4. LEGO BATMAN: Patrolling the upper skyline and rooftops
+   Swooping and hopping playfully in the upper atmosphere */
+#actorBatman{
+  animation:batmanRoam 24s ease-in-out infinite;
+}
+#actorBatman .actor-body{
+  animation:batmanHop .38s ease-in-out infinite alternate;
+}
+@keyframes batmanHop{
+  0%{transform:translateY(0) scale(1)}
+  100%{transform:translateY(-9px) scale(1.06)}
+}
+@keyframes batmanRoam{
+  0%   { transform: translate(calc(100vw + 70px), 12vh) scaleX(-1); }
+  22%  { transform: translate(82vw, 8vh) scaleX(-1); }
+  45%  { transform: translate(46vw, 20vh) scaleX(-1); }
+  68%  { transform: translate(14vw, 9vh) scaleX(-1); }
+  78%  { transform: translate(-80px, 16vh) scaleX(-1); }
+  78.1%{ transform: translate(-80px, 16vh) scaleX(1); }
+  88%  { transform: translate(40vw, 14vh) scaleX(1); }
+  96%  { transform: translate(80vw, 22vh) scaleX(1); }
+  100% { transform: translate(calc(100vw + 70px), 12vh) scaleX(1); }
+}
+
+/* ============================================================
+   MAIN GAME APP CONTAINER (Z-INDEX 2: REMAINS FRONT & CLEAN)
+   ============================================================ */
+#app{
+  height:100%;
+  max-width:620px;
+  margin:0 auto;
+  padding:16px 14px 10px 14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-sizing:border-box;
+  position:relative;
+  z-index:2;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-family:var(--px);
+  font-size:.62rem;
+  min-height:30px;
+  background:rgba(22, 8, 38, 0.94);
+  backdrop-filter:blur(4px);
+  padding:8px 16px;
+  border:2.5px solid #ff7aa4;
+  border-radius:18px;
+  color:#fff;
+  box-shadow:0 0 16px rgba(255, 122, 164, 0.35);
+}
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  letter-spacing:1px;
+}
+.hollow-heart{
+  color:#ffb3cc;
+  font-size:.85rem;
+}
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.sound-btn{
+  background:rgba(36, 14, 60, 0.85);
+  border:2px solid var(--accent-gold);
+  border-radius:12px;
+  color:var(--accent-gold);
+  font-family:var(--px);
+  font-size:.52rem;
+  padding:4px 10px;
+  cursor:pointer;
+  box-shadow:0 0 8px rgba(255, 211, 92, 0.3);
+  transition:transform .08s, box-shadow .08s;
+}
+.sound-btn:active{transform:scale(0.95)}
+.px{image-rendering:pixelated;vertical-align:middle}
+
+#bar{
+  position:relative;
+  height:22px;
+  border:2.5px solid #ff7aa4;
+  border-radius:12px;
+  background:rgba(22, 8, 38, 0.94);
+  box-shadow:0 0 14px rgba(255, 122, 164, 0.3);
+  padding:3px 5px;
+  display:flex;
+  gap:3px;
+  align-items:center;
+  box-sizing:border-box;
+}
+.bar-segment{
+  flex:1;
+  height:100%;
+  background:#2e1240;
+  border-radius:2px;
+  transition:background .25s, box-shadow .25s;
+}
+.bar-segment.filled{
+  background:#ff4f8b;
+  box-shadow:0 0 6px #ff4f8b;
+}
+
+.screen{
+  display:none !important;
+  flex:1;
+  min-height:0;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:14px;
+}
+.screen.on{
+  display:flex !important;
+}
+
+/* ============================================================
+   SCREEN 0: HERO CENTER & HOMEPAGE PRESENTATION
+   ============================================================ */
+#s0{
+  padding:10px 0 65px 0;
+  gap:10px;
+  box-sizing:border-box;
+}
+
+.hero-center{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  max-width:520px;
+  z-index:3;
+  margin:auto 0;
+}
+
+/* Teddy Bear in Glowing Pink Rounded Badge */
+.bear-badge-container{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:14px;
+  margin-bottom:4px;
+}
+.bear-badge-frame{
+  border:3px solid #ff7aa4;
+  border-radius:18px;
+  background:rgba(30, 11, 48, 0.94);
+  box-shadow:0 0 18px rgba(255, 122, 164, 0.6);
+  padding:7px 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  animation:bearBob 2.5s ease-in-out infinite alternate;
+  user-select:none;
+}
+@keyframes bearBob{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-8px)}
+}
+.bear-top-heart{
+  position:absolute;
+  top:-14px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#ff4f8b;
+  font-size:1.15rem;
+  filter:drop-shadow(0 0 6px #ff4f8b);
+  animation:heartPulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes heartPulse{
+  0%{transform:translateX(-50%) scale(0.92)}
+  100%{transform:translateX(-50%) scale(1.12)}
+}
+.sparkle-star{
+  position:absolute;
+  color:#ffd35c;
+  font-size:1.3rem;
+  filter:drop-shadow(0 0 8px rgba(255, 211, 92, 0.85));
+  animation:sparkleTwinkle 2s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+.left-star{left:-32px;top:32%}
+.right-star{right:-32px;top:32%;animation-delay:1s}
+  pointer-events:none;
+}
+.left-star{left:-34px;top:32%}
+.right-star{right:-34px;top:32%;animation-delay:1s}
+@keyframes sparkleTwinkle{
+  0%{transform:scale(0.85);opacity:0.75}
+  100%{transform:scale(1.2);opacity:1}
+}
+
+/* Hero Title Group */
+.hero-title-group{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+.hero-label{
+  font-family:var(--px);
+  font-size:.72rem;
+  color:#ffffff;
+  letter-spacing:2.5px;
+  text-shadow:0 2px 4px rgba(0,0,0,0.8);
+}
+.hero-name{
+  font-family:var(--px);
+  font-size:2.05rem;
+  color:#ffd35c;
+  margin:0;
+  text-shadow:0 4px 0 #b36a00, 0 6px 0 #000, 0 0 20px rgba(255, 211, 92, 0.5);
+  letter-spacing:3px;
+  font-weight:900;
+}
+.arrow-bracket{
+  color:#f39c12;
+}
+
+/* Description Card Flanked by Hearts */
+.desc-card-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  width:100%;
+  max-width:500px;
+}
+.side-heart{
+  color:#ff699a;
+  font-size:1.25rem;
+  filter:drop-shadow(0 0 8px #ff699a);
+  animation:heartFloat 1.8s ease-in-out infinite alternate;
+}
+.right-heart{animation-delay:.9s}
+@keyframes heartFloat{
+  0%{transform:translateY(0) scale(1)}
+  100%{transform:translateY(-5px) scale(1.1)}
+}
+.desc-card{
+  border:2px solid #ff7aa4;
+  border-radius:20px;
+  background:rgba(26, 9, 44, 0.94);
+  box-shadow:0 0 16px rgba(255, 122, 164, 0.4);
+  padding:12px 20px;
+  flex:1;
+}
+.desc-card p{
+  font-family:var(--txt);
+  font-size:1.32rem;
+  line-height:1.25;
+  color:#ffffff;
+  margin:0;
+  text-shadow:0 1px 2px rgba(0,0,0,0.8);
+}
+
+/* Golden Pill PRESS START Button */
+.press-start-btn{
+  border-radius:30px;
+  background:linear-gradient(180deg, #ffe066 0%, #ffb72b 100%);
+  border:2.5px solid #ffffff;
+  box-shadow:0 0 25px rgba(255, 211, 92, 0.85), 0 5px 0 #a66a00, 0 8px 16px rgba(0,0,0,0.6);
+  color:#0a0414;
+  font-family:var(--px);
+  font-size:.92rem;
+  font-weight:900;
+  padding:13px 36px;
+  cursor:pointer;
+  transition:transform .08s, box-shadow .08s;
+  margin-top:6px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  position:relative;
+  overflow:hidden;
+}
+.press-start-btn::before{
+  content:"";
+  position:absolute;
+  top:2px;
+  left:16px;
+  right:16px;
+  height:40%;
+  background:linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 100%);
+  border-radius:20px;
+  pointer-events:none;
+}
+.press-start-btn:active{
+  transform:translateY(3px);
+  box-shadow:0 0 15px rgba(255, 211, 92, 0.8), 0 2px 0 #a66a00;
+}
+.btn-arrow{
+  font-size:1.05rem;
+  color:#0a0414;
+}
+
+/* Ground Flanks & Props on Grass Platform */
+.screen0-props-layer{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:2;
+}
+.flank-left{
+  position:absolute;
+  bottom:72px;
+  left:35px;
+  display:flex;
+  align-items:flex-end;
+  gap:14px;
+  pointer-events:auto;
+}
+.flank-right{
+  position:absolute;
+  bottom:72px;
+  right:35px;
+  display:flex;
+  align-items:flex-end;
+  gap:14px;
+  pointer-events:auto;
+}
+.prop-item{
+  cursor:pointer;
+  transition:transform .12s, filter .12s;
+  filter:drop-shadow(0 3px 6px rgba(0,0,0,0.7));
+}
+.prop-item:hover{
+  filter:drop-shadow(0 0 12px var(--accent-gold));
+  transform:scale(1.08) translateY(-4px);
+}
+.signpost-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.sign-head{
+  border:2.5px solid #ffd35c;
+  background:#260e3a;
+  color:#ffd35c;
+  font-family:var(--px);
+  font-size:.65rem;
+  padding:5px 8px;
+  border-radius:5px;
+  box-shadow:0 0 8px rgba(255, 211, 92, 0.4);
+}
+.sign-post{
+  width:5px;
+  height:18px;
+  background:#5c3d28;
+  border:1px solid #14091a;
+}
+.oscar-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.oscar-pedestal{
+  width:32px;
+  height:8px;
+  background:#3b1e10;
+  border:2px solid #241107;
+  border-radius:2px;
+  box-shadow:0 2px 0 #120703;
+}
+
+/* Sky Actors */
+.sky-actor{
+  position:absolute;
+  pointer-events:auto;
+  cursor:pointer;
+  transition:transform .12s, filter .12s;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,0.6));
+}
+.sky-actor:hover{
+  filter:drop-shadow(0 0 14px var(--accent-gold));
+  transform:scale(1.1);
+}
+.jake-sky{
+  top:24%;
+  left:65px;
+  animation:jakeHover 3s ease-in-out infinite alternate;
+}
+@keyframes jakeHover{
+  0%{transform:translateY(0) rotate(-2deg)}
+  100%{transform:translateY(-8px) rotate(2deg)}
+}
+.batman-sky{
+  top:28%;
+  right:70px;
+  animation:batmanHover 2.6s ease-in-out infinite alternate;
+}
+@keyframes batmanHover{
+  0%{transform:translateY(0) scale(1)}
+  100%{transform:translateY(-9px) scale(1.05)}
+}
+
+@media (max-width: 900px){
+  .flank-left{left:12px;gap:8px;transform:scale(0.85);transform-origin:bottom left}
+  .flank-right{right:12px;gap:8px;transform:scale(0.85);transform-origin:bottom right}
+  .jake-sky{left:15px;transform:scale(0.85)}
+  .batman-sky{right:15px;transform:scale(0.85)}
+}
+@media (max-width: 600px){
+  .flank-left, .flank-right{display:none}
+  .jake-sky, .batman-sky{display:none}
+  .pixel-moon{right:16px;top:16px;width:48px;height:48px}
+  .hero-name{font-size:1.55rem}
+}
+
+/* Animated Dancing Teddy Bear */
+#bearIntro{
+  display:inline-block;
+  cursor:pointer;
+  transform-origin:bottom center;
+  animation:bearDance .85s ease-in-out infinite alternate;
+  transition:transform .12s;
+  user-select:none;
+}
+#bearIntro:hover{
+  animation:bearFastDance .42s ease-in-out infinite alternate;
+}
+@keyframes bearDance{
+  0%{
+    transform:translateY(0) rotate(-5deg) scale(1, 1);
+  }
+  50%{
+    transform:translateY(-10px) rotate(0deg) scale(1.04, 0.96);
+  }
+  100%{
+    transform:translateY(0) rotate(5deg) scale(1, 1);
+  }
+}
+@keyframes bearFastDance{
+  0%{
+    transform:translateY(0) rotate(-9deg) scale(1.06, 0.94);
+  }
+  50%{
+    transform:translateY(-14px) rotate(0deg) scale(0.96, 1.06);
+  }
+  100%{
+    transform:translateY(0) rotate(9deg) scale(1.06, 0.94);
+  }
+}
+
+#who{
+  display:inline-block;
+  cursor:pointer;
+  transform-origin:bottom center;
+  animation:whoGroove .9s ease-in-out infinite alternate;
+}
+@keyframes whoGroove{
+  0%{transform:translateY(0) rotate(-4deg)}
+  100%{transform:translateY(-6px) rotate(4deg)}
+}
+
+h1{
+  font-family:var(--px);
+  font-size:.92rem;
+  line-height:1.5;
+  margin:0;
+  color:var(--accent-gold);
+  text-shadow:2px 2px 0 #000;
+}
+p{margin:0;line-height:1.15;color:var(--muted)}
+button{font:inherit;cursor:pointer;color:inherit}
+.btn{
+  font-family:var(--px);
+  font-size:.78rem;
+  background:var(--accent);
+  color:#14091f;
+  border:3px solid var(--line);
+  box-shadow:4px 4px 0 var(--shadow);
+  padding:12px 18px;
+  border-radius:0;
+  cursor:pointer;
+  transition:transform .08s, box-shadow .08s;
+}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--shadow)}
+.btn.ghost{background:rgba(32,12,50,0.92);color:var(--ink);font-size:.65rem;padding:8px 14px}
+.btn.gold{background:var(--accent-gold);color:#14091f}
+:focus-visible{outline:3px dashed var(--accent-gold);outline-offset:2px}
+
+/* ============================================================
+   CINEMA BLASTER ARCADE SHOOTER STYLES
+   ============================================================ */
+.arcade-hud{
+  display:flex;
+  justify-content:space-between;
+  width:100%;
+  padding:6px 10px;
+  box-sizing:border-box;
+  background:rgba(18, 8, 30, 0.94);
+  border:2px solid var(--line);
+  box-shadow:3px 3px 0 var(--shadow);
+  font-family:var(--px);
+  font-size:.56rem;
+}
+.hud-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+}
+.hud-label{
+  color:var(--muted);
+  font-size:.44rem;
+}
+.hud-val{
+  color:var(--accent-gold);
+  font-weight:bold;
+}
+
+#field{
+  position:relative;
+  flex:1;
+  width:100%;
+  min-height:360px;
+  overflow:hidden;
+  background:#090412;
+  border:3px solid var(--line);
+  box-shadow:4px 4px 0 var(--shadow);
+  touch-action:none;
+  user-select:none;
+  cursor:crosshair;
+}
+#arcadeCanvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  image-rendering:pixelated;
+}
+
+.arcade-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(10, 4, 18, 0.88);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+  box-sizing:border-box;
+  gap:14px;
+  z-index:10;
+  transition:opacity .2s;
+}
+.arcade-overlay.hidden{
+  display:none;
+}
+.arcade-overlay h2{
+  font-family:var(--px);
+  font-size:1.15rem;
+  color:var(--accent-gold);
+  margin:0;
+  text-shadow:2px 2px 0 var(--shadow);
+  animation:neonFlicker 2s infinite alternate;
+}
+.arcade-overlay p{
+  font-family:var(--txt);
+  font-size:1.35rem;
+  color:#fff;
+  margin:0;
+  max-width:380px;
+}
+.arcade-btn-row{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:100%;
+  max-width:280px;
+}
+
+.arcade-controls-bar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.ctrl-tip{
+  font-family:var(--txt);
+  font-size:1.05rem;
+  color:var(--muted);
+  flex:1;
+  text-align:left;
+}
+.btn-sm{
+  padding:6px 10px;
+  font-size:.56rem;
+  letter-spacing:0;
+}
+.shake{animation:shake .3s steps(4)}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* Scene 2 Dialogue */
+.dlg{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  width:100%;
+  box-sizing:border-box;
+  background:rgba(30,12,48,0.94);
+  border:4px solid var(--line);
+  box-shadow:4px 4px 0 var(--shadow);
+  padding:12px;
+  text-align:left;
+}
+#qtext{line-height:1.15;font-size:1.6rem}
+#opts{display:flex;flex-direction:column;gap:10px;width:100%;position:relative}
+.opt{
+  text-align:left;
+  font-size:1.45rem;
+  line-height:1.15;
+  background:rgba(35,15,55,0.9);
+  border:4px solid var(--line);
+  box-shadow:4px 4px 0 var(--shadow);
+  padding:10px 14px;
+  border-radius:0;
+  cursor:pointer;
+  transition:all .1s;
+}
+.opt::before{content:"\00a0\00a0"}
+.opt:hover::before,.opt:focus-visible::before{content:">\00a0"}
+.opt:hover{background:var(--accent);color:#14091f}
+.opt.bad{animation:shake .3s steps(4);background:#e07a5f!important;color:#fff!important}
+.opt.good{background:var(--accent-gold)!important;color:#14091f!important}
+#say{min-height:2.2em;line-height:1.15;font-size:1.4rem;color:var(--accent-gold);text-shadow:1px 1px 0 #000}
+
+/* Scene 3 Lock & Cassette */
+#lock{
+  background:none;
+  border:0;
+  padding:10px;
+  line-height:0;
+  cursor:pointer;
+  transition:transform .15s;
+}
+#lock:hover{transform:scale(1.08)}
+#lock img{animation:wig 1.2s steps(2) infinite}
+#lock.open img{animation:none}
+@keyframes wig{50%{transform:translateY(-6px)}}
+
+#playerBox{
+  display:none;
+  width:100%;
+  background:rgba(28,11,46,0.95);
+  border:4px solid var(--line);
+  box-shadow:4px 4px 0 var(--shadow);
+  padding:12px;
+  box-sizing:border-box;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  animation:popIn .35s steps(6);
+}
+@keyframes popIn{0%{opacity:0;transform:scale(0.85)}100%{opacity:1;transform:scale(1)}}
+
+.youtube-audio-bar {
+  width: 320px;
+  height: 45px; /* Crops out the video so only the control bar shows */
+  overflow: hidden;
+  border-radius: 8px;
+  position: relative;
+  border: 2px solid var(--accent-gold);
+  box-shadow: 0 0 10px rgba(255, 211, 92, 0.35);
+  background: #000;
+  margin-top: 4px;
+}
+
+.youtube-audio-bar iframe {
+  position: absolute;
+  bottom: 0; /* Anchors the bottom play/pause bar inside the visible box */
+  left: 0;
+  width: 320px;
+  height: 315px;
+  border: 0;
+}
+.player-tape-wrapper{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  width:100%;
+}
+.tape-icon{
+  position:relative;
+  display:inline-block;
+}
+.tape-reels{
+  position:absolute;
+  top:30%;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:space-around;
+  padding:0 24px;
+  pointer-events:none;
+}
+.reel{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  border:2px dashed var(--accent-gold);
+}
+.playing .reel{animation:spin 1.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.player-info{
+  text-align:left;
+  flex:1;
+}
+.player-title{
+  font-family:var(--px);
+  font-size:.65rem;
+  color:var(--accent);
+  margin-bottom:4px;
+}
+.player-subtitle{
+  font-size:1.25rem;
+  color:var(--muted);
+  line-height:1.1;
+}
+.eq-bars{
+  display:flex;
+  gap:3px;
+  align-items:flex-end;
+  height:18px;
+  margin-top:6px;
+}
+.eq-bar{
+  width:5px;
+  height:4px;
+  background:var(--accent-gold);
+}
+.playing .eq-bar:nth-child(1){animation:jump .4s ease-in-out infinite alternate}
+.playing .eq-bar:nth-child(2){animation:jump .6s ease-in-out infinite alternate .1s}
+.playing .eq-bar:nth-child(3){animation:jump .35s ease-in-out infinite alternate .2s}
+.playing .eq-bar:nth-child(4){animation:jump .55s ease-in-out infinite alternate .15s}
+.playing .eq-bar:nth-child(5){animation:jump .45s ease-in-out infinite alternate .05s}
+.playing .eq-bar:nth-child(6){animation:jump .7s ease-in-out infinite alternate .25s}
+@keyframes jump{0%{height:3px}100%{height:18px}}
+
+.player-controls{
+  display:flex;
+  gap:10px;
+  width:100%;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.play-btn{
+  font-family:var(--px);
+  font-size:.68rem;
+  background:var(--accent-gold);
+  color:#14091f;
+  border:3px solid var(--line);
+  box-shadow:3px 3px 0 var(--shadow);
+  padding:8px 14px;
+  cursor:pointer;
+}
+.play-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--shadow)}
+.audio-source-toggle{
+  font-family:var(--txt);
+  font-size:1.2rem;
+  color:var(--muted);
+  text-decoration:underline;
+  cursor:pointer;
+  background:none;
+  border:none;
+}
+
+/* Actors Entourage Cheer Row */
+.actors-entourage{
+  display:none;
+  justify-content:space-around;
+  align-items:center;
+  width:100%;
+  background:rgba(28,11,46,0.92);
+  border:3px solid var(--line);
+  box-shadow:3px 3px 0 var(--shadow);
+  padding:8px 10px;
+  box-sizing:border-box;
+  animation:popIn .35s steps(6);
+}
+.squad-member{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:3px;
+  cursor:pointer;
+  transition:transform .12s;
+}
+.squad-member:hover{transform:scale(1.12)}
+.squad-member:active{transform:scale(0.95)}
+.squad-name{
+  font-family:var(--px);
+  font-size:.44rem;
+  color:var(--accent-gold);
+  margin-top:2px;
+  text-shadow:1px 1px 0 #000;
+}
+
+/* Speech bubble popup when clicking any character */
+.actor-bubble{
+  position:fixed;
+  z-index:9999;
+  background:#14091f;
+  color:#fff;
+  border:3px solid var(--accent-gold);
+  box-shadow:4px 4px 0 #000;
+  font-family:var(--px);
+  font-size:.65rem;
+  line-height:1.45;
+  padding:10px 14px;
+  max-width:260px;
+  text-align:center;
+  pointer-events:none;
+  animation:bubblePop .28s ease-out forwards;
+}
+@keyframes bubblePop{
+  0%{opacity:0;transform:scale(0.8) translateY(10px)}
+  100%{opacity:1;transform:scale(1) translateY(0)}
+}
+
+/* Apology Letter */
+#letter{
+  display:none;
+  width:100%;
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  text-align:left;
+  box-sizing:border-box;
+  background:rgba(26,10,40,0.95);
+  border:4px solid var(--line);
+  box-shadow:4px 4px 0 var(--shadow);
+  padding:16px;
+  font-size:1.55rem;
+  line-height:1.2;
+  white-space:pre-wrap;
+}
+#letter::-webkit-scrollbar{width:8px}
+#letter::-webkit-scrollbar-thumb{background:var(--accent);border:2px solid var(--line)}
+
+/* VIP Movie Ticket */
+#moviePass{
+  display:none;
+  width:100%;
+  box-sizing:border-box;
+  background:#fffdf0;
+  color:#14091f;
+  border:4px dashed #ff4f8b;
+  box-shadow:4px 4px 0 var(--shadow);
+  padding:12px;
+  text-align:center;
+  margin-top:6px;
+  position:relative;
+}
+#moviePass h2{
+  font-family:var(--px);
+  font-size:.7rem;
+  color:#ff4f8b;
+  margin:0 0 6px 0;
+  letter-spacing:1px;
+}
+.ticket-perks{
+  font-size:1.3rem;
+  line-height:1.15;
+  color:#333;
+}
+.ticket-barcode{
+  font-family:monospace;
+  letter-spacing:4px;
+  font-size:1.1rem;
+  font-weight:bold;
+  margin-top:6px;
+  color:#666;
+}
+
+#sign{
+  display:none;
+  width:100%;
+  gap:10px;
+  justify-content:center;
+}
+.float{
+  position:fixed;
+  bottom:-50px;
+  pointer-events:none;
+  animation:rise linear forwards;
+  z-index:99;
+}
+@keyframes rise{to{transform:translateY(-115vh)}}
+
+/* Movie End Credits Overlay */
+#creditsModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(10,5,18,0.94);
+  z-index:999;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  overflow:hidden;
+  padding:20px;
+}
+#creditsModal.open{display:flex}
+.credits-roll{
+  text-align:center;
+  font-family:var(--px);
+  color:#fff;
+  animation:rollCredits 20s linear infinite;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+@keyframes rollCredits{
+  0%{transform:translateY(100vh)}
+  100%{transform:translateY(-120%)}
+}
+.credit-job{font-size:.65rem;color:var(--accent-gold);margin-bottom:4px}
+.credit-name{font-size:.9rem;color:#fff}
+.close-credits{
+  position:absolute;
+  top:16px;
+  right:16px;
+  background:var(--accent);
+  color:#14091f;
+  border:3px solid #fff;
+  font-family:var(--px);
+  font-size:.65rem;
+  padding:8px 12px;
+  z-index:1000;
+  cursor:pointer;
+}
+
+@media (prefers-reduced-motion:reduce){
+  #lock img{animation:none}
+  .float{display:none}
+  .credits-roll{animation:none}
+  .roam-actor{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Ambient Retro Cinema Starry Sky Background -->
+<div id="cinemaBg" aria-hidden="true">
+  <div class="sky-stars"></div>
+  
+  <!-- Glowing Pixel Full Moon in Top Right -->
+  <div class="pixel-moon">
+    <div class="moon-crater c1"></div>
+    <div class="moon-crater c2"></div>
+    <div class="moon-crater c3"></div>
+    <div class="moon-crater c4"></div>
+  </div>
+
+  <!-- Floating Pixel Clouds -->
+  <div class="pixel-cloud cloud-top-left"></div>
+  <div class="pixel-cloud cloud-top-right"></div>
+  <div class="pixel-cloud cloud-mid-left"></div>
+  <div class="pixel-cloud cloud-mid-right"></div>
+
+  <!-- City Skyline with Lit Windows -->
+  <div class="city-skyline"></div>
+
+  <!-- Retro Pixel Grass & Dirt Ground Platform -->
+  <div class="ground-platform"></div>
+</div>
+
+<!-- Autonomous Roaming Pixel Actors in Background (Moving up, down, left, right) -->
+<div id="roamActors" aria-hidden="true" style="display:none">
+  <!-- Jake Gyllenhaal (Headphones, sunglasses, Demolition dance walk) -->
+  <div class="roam-actor" id="actorJake" title="Jake Gyllenhaal">
+    <div class="actor-body" id="sprJake"></div>
+  </div>
+
+  <!-- Tom Hardy (Legend: Navy suit, holding out bouquet of flowers) -->
+  <div class="roam-actor" id="actorHardy" title="Tom Hardy">
+    <div class="actor-body" id="sprHardy"></div>
+  </div>
+
+  <!-- Christian Bale (Patrick Bateman: Sharp pinstripe suit, red tie, business card) -->
+  <div class="roam-actor" id="actorBale" title="Christian Bale">
+    <div class="actor-body" id="sprBale"></div>
+  </div>
+
+  <!-- Lego Batman (Cape, Bat-ears, gliding & hopping in the upper stars) -->
+  <div class="roam-actor" id="actorBatman" title="Lego Batman">
+    <div class="actor-body" id="sprBatman"></div>
+  </div>
+</div>
+
+<div id="app">
+  <header>
+    <div class="header-left">
+      <span id="hl">For Sudeep</span>
+      <span class="hollow-heart">&#9825;</span>
+    </div>
+    <div class="header-actions">
+      <button class="sound-btn" id="soundToggle" aria-label="Toggle Sound">&#9834; Sound: ON</button>
+      <span id="hr"></span>
+    </div>
+  </header>
+  <div id="bar"></div>
+
+  <!-- Screen 0: Intro / Movie Opening -->
+  <section class="screen on" id="s0">
+    <div class="hero-center">
+      <!-- Bear in Glowing Pink Rounded Badge -->
+      <div class="bear-badge-container">
+        <div class="sparkle-star left-star">&#10022;</div>
+        <div class="bear-top-heart">&#9829;</div>
+        <div class="sparkle-star right-star">&#10022;</div>
+        <div class="bear-badge-frame" id="bearIntro"></div>
+      </div>
+
+      <!-- Title Group -->
+      <div class="hero-title-group">
+        <div class="hero-label">A LITTLE GAME FOR</div>
+        <h1 class="hero-name"><span class="arrow-bracket">&gt;</span> SUDEEP <span class="arrow-bracket">&lt;</span></h1>
+      </div>
+
+      <!-- Description Card Flanked by Hearts -->
+      <div class="desc-card-row">
+        <div class="side-heart left-heart">&#9829;</div>
+        <div class="desc-card">
+          <p>I made this arcade game to say I'm sorry.<br></p>
+        </div>
+        <div class="side-heart right-heart">&#9829;</div>
+      </div>
+
+      <!-- Golden Pill "PRESS START" Button -->
+      <button class="press-start-btn" id="start">
+        <span class="btn-arrow">&#9654;</span> PRESS START
+      </button>
+    </div>
+
+    <!-- Ground Characters & Props Placed on Grass Platform on Screen 0 -->
+    <div class="screen0-props-layer" id="screen0Props">
+      <!-- Left Flank on Platform: Signpost, Christian Bale, Popcorn -->
+      <div class="flank-left">
+        <div class="prop-item signpost-item" id="propSign" title="Stage Sign">
+          <div class="sign-head">&gt;&gt;</div>
+          <div class="sign-post"></div>
+        </div>
+        <div class="prop-item actor-item" id="propBale" title="Christian Bale">
+          <div id="sprBaleHero"></div>
+        </div>
+        <div class="prop-item popcorn-item" id="propPopcorn" title="Popcorn Tub">
+          <div id="sprPopcornHero"></div>
+        </div>
+      </div>
+
+      <!-- Right Flank on Platform: Tom Hardy with Flowers, Oscar Trophy on Pedestal -->
+      <div class="flank-right">
+        <div class="prop-item actor-item" id="propHardy" title="Tom Hardy">
+          <div id="sprHardyHero"></div>
+        </div>
+        <div class="prop-item oscar-item" id="propOscar" title="Oscar Trophy">
+          <div id="sprOscarHero"></div>
+          <div class="oscar-pedestal"></div>
+        </div>
+      </div>
+
+      <!-- Sky Actors floating near Clouds -->
+      <div class="sky-actor jake-sky" id="propJake" title="Jake Gyllenhaal">
+        <div id="sprJakeHero"></div>
+      </div>
+      <div class="sky-actor batman-sky" id="propBatman" title="Lego Batman">
+        <div id="sprBatmanHero"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screen 1: Cinema Blaster Arcade -->
+  <section class="screen" id="s1">
+    <div class="arcade-hud">
+      <div class="hud-item"><span class="hud-label">SCORE</span><span class="hud-val" id="hudScore">000000</span></div>
+      <div class="hud-item"><span class="hud-label">BEST</span><span class="hud-val" id="hudBest">000000</span></div>
+      <div class="hud-item"><span class="hud-label">SHIELD</span><span class="hud-val" id="hudLives">III</span></div>
+      <div class="hud-item"><span class="hud-label">WEAPON</span><span class="hud-val" id="hudWeapon">L1 DUAL</span></div>
+      <div class="hud-item"><span class="hud-label">COMBO</span><span class="hud-val" id="hudCombo">x1</span></div>
+    </div>
+    <div id="field">
+      <canvas id="arcadeCanvas"></canvas>
+      <div id="arcadeOverlay" class="arcade-overlay hidden">
+        <h2 id="overlayTitle">LEVEL CLEARED</h2>
+        <p id="overlaySub">You cleared every wave. Ready for the questions?</p>
+        <div class="arcade-btn-row">
+          <button class="btn gold" id="btnNextScene">Continue</button>
+          <button class="btn ghost" id="btnPlayAgain">Endless Mode</button>
+        </div>
+      </div>
+    </div>
+    <div class="arcade-controls-bar">
+      <span class="ctrl-tip">Drag or use Arrow keys • Auto-blaster firing</span>
+      <button class="btn ghost btn-sm" id="btnBomb">BOMB (<span id="bombCount">1</span>)</button>
+      <button class="btn ghost btn-sm" id="btnAutoFire">AUTO: ON</button>
+    </div>
+  </section>
+
+  <!-- Screen 2: The Cinema Questions (Dialogue) -->
+  <section class="screen" id="s2">
+    <div class="dlg">
+      <div id="who"></div>
+      <div id="qtext"></div>
+    </div>
+    <div id="opts"></div>
+    <div id="say"></div>
+  </section>
+
+  <!-- Screen 3: The Secret Screening / Lock & Letter -->
+  <section class="screen" id="s3">
+    <button id="lock" aria-label="Unlock the message"></button>
+    <h1 id="lt">The Vault is Locked</h1>
+    <p id="lp">Tap the lock to open the message.</p>
+
+    <!-- Actor Entourage cheer squad during final screening -->
+    <div class="actors-entourage" id="letterEntourage">
+      <div class="squad-member" id="endHardy" title="Tom Hardy offering flowers">
+        <div id="endHardySpr"></div>
+        <div class="squad-name">Tom Hardy</div>
+      </div>
+      <div class="squad-member" id="endJake" title="Jake Gyllenhaal listening to song">
+        <div id="endJakeSpr"></div>
+        <div class="squad-name">Jake Gyllenhaal</div>
+      </div>
+      <div class="squad-member" id="endBale" title="Patrick Bateman approval">
+        <div id="endBaleSpr"></div>
+        <div class="squad-name">Christian Bale</div>
+      </div>
+      <div class="squad-member" id="endBatman" title="Lego Batman">
+        <div id="endBatmanSpr"></div>
+        <div class="squad-name">Lego Batman</div>
+      </div>
+    </div>
+
+    <!-- The Apology Letter -->
+    <div id="letter"></div>
+
+    <!-- VIP Movie Ticket -->
+    <div id="moviePass">
+      <h2>MOVIE NIGHT PASS</h2>
+      <div class="ticket-perks">
+        Admit: Sudeep &amp; Anusha<br>
+        - Sudeep picks the next 3 movies<br>
+        - All snacks &amp; popcorn on Anusha<br>
+        - Unlimited patience and movie debriefs
+      </div>
+      <div class="ticket-barcode">||| | |||| || ||| |||| | ||</div>
+    </div>
+
+    <div id="sign" style="display:none; margin-top:8px;">
+      <button class="btn gold" id="creditsBtn">Roll Credits</button>
+      <button class="btn ghost" id="again">Play Again</button>
+    </div>
+  </section>
+</div>
+
+<!-- Movie End Credits Modal -->
+<div id="creditsModal">
+  <button class="close-credits" id="closeCredits">Close</button>
+  <div class="credits-roll">
+    <div>
+      <div class="credit-job">A PRODUCTION BY</div>
+      <div class="credit-name">ANUSHA</div>
+    </div>
+    <div>
+      <div class="credit-job">DEDICATED TO</div>
+      <div class="credit-name">SUDEEP</div>
+    </div>
+    <div>
+      <div class="credit-job">SPECIAL GUEST APPEARANCES</div>
+      <div class="credit-name">CHRISTIAN BALE • JAKE GYLLENHAAL • TOM HARDY • LEGO BATMAN</div>
+    </div>
+    <div>
+      <div class="credit-job">CHIEF EXECUTIVE OF SNACKS</div>
+      <div class="credit-name">ANUSHA</div>
+    </div>
+    <div>
+      <div class="credit-job">SUPREME MASTER OF THE REMOTE</div>
+      <div class="credit-name">SUDEEP</div>
+    </div>
+    <div>
+      <div class="credit-job">REVIEW</div>
+      <div class="credit-name">10/10 - BEST DUO EVER</div>
+    </div>
+    <div>
+      <div class="credit-job">BOX OFFICE VERDICT</div>
+      <div class="credit-name">"DESERVES A SEQUEL WITH A HAPPY ENDING"</div>
+    </div>
+    <div>
+      <div class="credit-job">THE END</div>
+      <div class="credit-name">SEE YOU AT OUR NEXT MOVIE NIGHT</div>
+    </div>
+  </div>
+</div>
+
+<!-- Optional external audio holder -->
+<audio id="customAudio" preload="auto"></audio>
+
+<script>
+// ============================================================
+// DOM SELECTOR - MUST BE FIRST TO PREVENT REFERENCE ERRORS
+// ============================================================
+const $ = id => document.getElementById(id);
+
+// ============================================================
+// CUSTOMIZATION SETTINGS
+// Edit these freely!
+// ============================================================
+const HIS_NAME = "Sudeep";   // His name
+const MY_NAME  = "Anusha";   // Your name
+
+// Optional: you can place an audio file (e.g. "song.mp3") in this folder and put its name here:
+const CUSTOM_AUDIO_URL = ""; 
+
+const MESSAGE =
+"I love you. I’m sorry.\n\n" +
+"I’m sorry. I love you.";
+
+const GOAL = 15;
+
+// Cinema & couple themed questions:
+const QUESTIONS = [
+  {
+    q: "Real talk: what's our relationship genre?",
+    opts: [
+      { t: "Rom-com: funny, a little chaotic, but always end up together", ok: 1, say: "That is definitely us." },
+      { t: "Psychological thriller: whenever I say 'I'm fine'", ok: 1, say: "Fair point... but no more plot twists, I promise." },
+      { t: "A comfort movie starring my favorite person", ok: 1, say: "My absolute favorite." }
+    ]
+  },
+  {
+    q: "Who is more likely to take 20 minutes to decide what to eat?",
+    opts: [
+      { t: "Sudeep", ok: 1, say: "Granted. You have great taste anyway." },
+      { t: "Anusha", ok: 1, say: "NOOOO,NOT me pleaseee" },
+      { t: "Both. We're doomed.", ok: 1, say: "Our classic ritual." }
+    ]
+  },
+  {
+    q: "Our official rating together:",
+    opts: [
+      { t: "10/10: Unbeatable chemistry and best movie debriefs", ok: 1, say: "Undisputed fact." },
+      { t: "A little dramatic sometimes, but still the best", ok: 1, say: "We always find our way back." },
+      { t: "0/10", ok: 0, run: 1, say: "Nope! Not an option. Try again!" }
+    ]
+  },
+  {
+    q: "Final question: Will you forgive me and let me make it up to you?",
+    opts: [
+      { t: "Yes, let's talk and hang out", ok: 1, say: "Thank you so much. I really appreciate you." },
+      { t: "Only if you bring all the snacks and popcorn", ok: 1, say: "Already guaranteed. Whatever snacks you want." },
+      { t: "No", ok: 0, run: 1, say: "Please? Give me another shot :)" }
+    ]
+  }
+];
+
+// ============================================================
+// PIXEL SPRITE MATRIX
+// ============================================================
+const PAL = {
+  o:"#0a0414", // deep dark outline
+  k:"#15101d", // black / dark suit
+  K:"#252030", // charcoal
+  w:"#ffffff", // crisp white
+  g:"#7e7488", // grey
+  s:"#cac2d4", // silver / paper wrap
+  y:"#ffd35c", // yellow (Batman logo / utility belt / gold)
+  Y:"#f39c12", // gold amber
+  r:"#be1226", // crimson red tie / red rose
+  R:"#ff3b7c", // vivid rose pink
+  p:"#ff8eb2", // soft blossom pink
+  G:"#2d9c43", // flower foliage green
+  b:"#5c3d28", // dark brown hair
+  B:"#8c5a38", // medium brown hair
+  l:"#f8cbb0", // peach skin tone
+  L:"#e0a688", // skin shade
+  u:"#162842", // deep navy gangster suit (Tom Hardy)
+  U:"#28446e", // navy highlight
+  c:"#40d2f0", // cyan sunglasses glint
+  C:"#1e82a0"  // dark cyan
+};
+
+const H = [
+  "..ooo.ooo..",
+  ".opppopppo.",
+  "opwwppppppo",
+  "opwpppppppo",
+  "opppppppppo",
+  ".opppppppo.",
+  "..opppppo..",
+  "...opppo...",
+  "....opo....",
+  ".....o....."
+];
+
+const HB = H.map(r => r.replace(/p/g,"g").replace(/w/g,"s").split(""));
+[[2,5],[3,4],[4,5],[5,4],[6,5]].forEach(([y,x]) => HB[y][x] = "o");
+const HBROKE = HB.map(r => r.join(""));
+
+// Bear with retro 3D Cinema Glasses (Cyan & Red)
+const BEAR_3D = [
+  "..oo....oo..",
+  ".obbo..obbo.",
+  "obbbbbbbbbbo",
+  "obbbbbbbbbbo",
+  "occcccrrrrro",
+  "occcckrrrrro",
+  "obpbllllbpbo",
+  "obbblkklbbbo",
+  "obbbllllbbbo",
+  ".obbbbbbbbo.",
+  "..oooooooo.."
+];
+
+const LOCK = [
+  "...oooo...",
+  "..osssso..",
+  "..os..so..",
+  "..os..so..",
+  "oooooooooo",
+  "oyyyyyyyyo",
+  "oywyyyyyyo",
+  "oyyyooyyyo",
+  "oyyyooyyyo",
+  "oyyyyyyyyo",
+  "oooooooooo"
+];
+const LOCKO = LOCK.slice();
+LOCKO[3] = "..os......";
+
+// Popcorn Sprite
+const POPCORN = [
+  "..yyyyyy..",
+  ".yyyyyyyy.",
+  ".yyyyyyyy.",
+  "oooooooooo",
+  "orwrwwrwro",
+  "orwrwwrwro",
+  "orwrwwrwro",
+  ".orrrrrro.",
+  "..oooooo.."
+];
+
+// Cassette Tape Sprite
+const CASSETTE = [
+  "..oooooooooo..",
+  ".osssssssssso.",
+  "ossssyyyysssso",
+  "osssyyyyssssso",
+  "osoookkkooosso",
+  "osokooooookoso",
+  "osoookkkooosso",
+  "osssssssssssso",
+  ".osssssssssso.",
+  "..oooooooooo.."
+];
+
+const STAR = [
+  "...oooo...",
+  "...oyyo...",
+  "..oyyyyo..",
+  "ooyyyyyyoo",
+  ".oyyyyyyo.",
+  "..oyyyyo..",
+  ".oyy..yyo.",
+  "..oo..oo.."
+];
+
+// Oscar Trophy Sprite (+3 pts)
+const OSCAR = [
+  "...oyyo...",
+  "...oyyo...",
+  "..oyyyyo..",
+  "..oyyyyo..",
+  "...oyyo...",
+  "...oyyo...",
+  "...oyyo...",
+  "...oyyo...",
+  "..oyyyyo..",
+  "..oyyyyo..",
+  ".oYYYYYYo.",
+  ".oYYYYYYo.",
+  "oooooooooo",
+  "oooooooooo"
+];
+
+// Rotten Tomato Sprite (-2 pts, dodge!)
+const TOMATO = [
+  "....GGo...",
+  "...GGGGo..",
+  "..orrrro..",
+  ".orrrrrro.",
+  ".orrrrrro.",
+  ".orrrrrro.",
+  ".orrrrrro.",
+  "..orrrro..",
+  "...oooo...",
+  ".........."
+];
+
+// VIP Movie Ticket Sprite (+2 pts)
+const TICKET = [
+  "..oooooooo..",
+  ".oyyyyyyyyo.",
+  "oyywooyyyyyo",
+  "oooyyyooyooo",
+  "oooyyyooyooo",
+  "oyywooyyyyyo",
+  ".oyyyyyyyyo.",
+  "..oooooooo.."
+];
+
+// Teddy Bear Catcher holding Popcorn Tub
+const BEAR_PLAYER = [
+  "..oo......oo..",
+  ".obbo....obbo.",
+  "obbbbbbbbbbbbo",
+  "obbbbbbbbbbbbo",
+  "occcccoorrrrro",
+  "occcckoorrrrro",
+  "obpblllllllpbo",
+  "obbblkklkklbbo",
+  "obbblllllllbbo",
+  ".obbbbbbbbbbo.",
+  ".orrrrrrrrrro.",
+  ".orwwrwwrwwro.",
+  ".orwwrwwrwwro.",
+  "..oooooooooo.."
+];
+
+// Sleek Pixel Cinema Bat-Jet
+const BAT_SHIP = [
+  ".....yy.....",
+  "....yyyy....",
+  "...kkyykk...",
+  "...kkkkkk...",
+  "..kkkcckkk..",
+  "..kkcccckk..",
+  ".kkkcccckkk.",
+  "kkkkyyyykkkk",
+  "kkykkkkykkyk",
+  "k.y.kk.y.k.y",
+  "...rrrr....."
+];
+
+// Spoiler Clapperboard Target
+const CLAPPER = [
+  "k.w.k.w.k.w.k",
+  "w.k.w.k.w.k.w",
+  "kkkkkkkkkkkkk",
+  "krrrrrrrrrrrk",
+  "kr...rrr...rk",
+  "kr.r.rrr.r.rk",
+  "kr...rrr...rk",
+  "krrrrrrrrrrrk",
+  "kkkkkkkkkkkkk"
+];
+
+// ============================================================
+// HANDCRAFTED MOVIE ACTORS PIXEL ART
+// ============================================================
+// 1. Christian Bale (Patrick Bateman in dark pinstripe suit, crimson tie, bone-white card)
+const BALE = [
+  ".....bbBBbb.....",
+  "....bBBBBBBb....",
+  "...bBBbBBbBBb...",
+  "...bblllllllbb..",
+  "...b.kl.ll.klb..",
+  "...blllllllll...",
+  "....bllllllb....",
+  ".....bllllb.....",
+  "...kwwkwwkwwk...",
+  "..kKkwkrrkwkKk..",
+  ".kKKkkkrrkkkKKk.",
+  ".kKKkkkrrkkkKKk.",
+  ".kKKkkkrrkkkKKs.",
+  ".kKKkkkrrkkkKKsw",
+  "..kKKkkrkKKkllsw",
+  "...kkkk..kkkk...",
+  "...kkkk..kkkk...",
+  "...kKKk..kKKk...",
+  "...kkkk..kkkk...",
+  "..okkkk..okkkk.."
+];
+
+// 2. Jake Gyllenhaal (Demolition with over-ear headphones, sunglasses, thin wire)
+const JAKE = [
+  "....oKKKKKKo....",
+  "...bBBbBBbBBb...",
+  "..oKbbbbbbbbKo..",
+  ".oK.bccccccb.Ko.",
+  "oKKobkckkckboKKo",
+  ".oK.bllllllb.Ko.",
+  "....bllllllb....",
+  ".....bllllb.....",
+  "..kkkkw..wkkkk..",
+  ".kKKkw..swkKKk..",
+  ".kKKkkw.sw.kKKk.",
+  ".kKKkkkwswkkKKk.",
+  ".kKKkkkwswkkKKk.",
+  ".kKKkkkkswkkKKk.",
+  "..kKKkkkkkkkKK..",
+  "...kkkk..kkkk...",
+  "...kkkk..kkkk...",
+  "...kkkk..kkkk...",
+  "...kkkk..kkkk...",
+  "..okkkk..okkkk.."
+];
+
+// 3. Tom Hardy (Legend: Reggie Kray holding an apology bouquet of roses & blossoms)
+const HARDY = [
+  "......bbbbbb......",
+  ".....bbBBbBBb.....",
+  "....bBBbbbbbb.....",
+  "....bblllllllbb...",
+  "....b.kl.ll.klb...",
+  "....blllllllll....",
+  ".....bllllllb.....",
+  "......bllllb......",
+  "...uuuwkwwkuuu....",
+  "..uUUuwkkkkwuUUu..",
+  ".uUUuukkkkkuUUu.Rp",
+  ".uUUuukkkkkuUUrwRR",
+  ".uUUuukkkkkuUUGRwR",
+  "..uUUukkkkkuUUGGGp",
+  "...uuukkkkkuUUllss",
+  "...uuuu..uuuu..sss",
+  "...uuuu..uuuu...ss",
+  "...uuuu..uuuu.....",
+  "...uuuu..uuuu.....",
+  "..ouuuu..ouuuu...."
+];
+
+// 4. Lego Batman (Pointy cowl ears, Bat-insignia, yellow belt, cape)
+const BATMAN = [
+  "..o..........o..",
+  "..oo..oooo..oo..",
+  "..ookkkkkkkkoo..",
+  "..ookkkwkkwkkoo.",
+  "..ookkkllkkkkoo.",
+  "...okkkllllkko..",
+  "...ookkllllkko..",
+  "....ookkkkkko...",
+  "..kkkkkkkkkkkk..",
+  ".kkkkooooooookk.",
+  ".kkkoyyyyyyyyokk",
+  ".kkooykkykkyyokk",
+  ".kkooyyyyyyyyokk",
+  "..kkooooooooook.",
+  "..kkyyyyyyyyyykk",
+  "...kkkk..kkkk...",
+  "...kkkk..kkkk...",
+  "...kkkk..kkkk...",
+  "...kkkk..kkkk...",
+  "..okkkk..okkkk.."
+];
+
+function spr(rows) {
+  let r = "";
+  rows.forEach((row, y) => {
+    let x = 0;
+    while (x < row.length) {
+      const c = row[x];
+      let n = 1;
+      while (row[x + n] === c) n++;
+      if (c !== "." && PAL[c]) {
+        r += '<rect x="' + x + '" y="' + y + '" width="' + n + '" height="1" fill="' + PAL[c] + '"/>';
+      }
+      x += n;
+    }
+  });
+  return "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + rows[0].length + ' ' + rows.length + '" shape-rendering="crispEdges">' + r + '</svg>');
+}
+
+function img(rows, scale) {
+  const i = new Image();
+  i.src = spr(rows);
+  i.width = rows[0].length * scale;
+  i.className = "px";
+  i.alt = "";
+  return i;
+}
+
+// ============================================================
+// AUDIO SYSTEM (WEB AUDIO API + BGM SYNTH + SFX)
+// ============================================================
+let actx = null;
+let soundEnabled = true;
+let bgmInterval = null;
+let isBgmPlaying = false;
+
+function initAudio() {
+  if (!actx) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (AudioContext) actx = new AudioContext();
+  }
+  if (actx && actx.state === "suspended") {
+    actx.resume();
+  }
+}
+
+function sfx(type) {
+  if (!soundEnabled) return;
+  initAudio();
+  if (!actx) return;
+
+  const now = actx.currentTime;
+  const osc = actx.createOscillator();
+  const gain = actx.createGain();
+  osc.connect(gain);
+  gain.connect(actx.destination);
+
+  if (type === "heart") {
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(523.25, now);
+    osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.08);
+    gain.gain.setValueAtTime(0.2, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.16);
+    osc.start(now);
+    osc.stop(now + 0.16);
+  } else if (type === "popcorn") {
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(659.25, now);
+    osc.frequency.setValueAtTime(987.77, now + 0.06);
+    osc.frequency.setValueAtTime(1318.51, now + 0.12);
+    gain.gain.setValueAtTime(0.22, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.28);
+    osc.start(now);
+    osc.stop(now + 0.28);
+  } else if (type === "hurt") {
+    osc.type = "sawtooth";
+    osc.frequency.setValueAtTime(220, now);
+    osc.frequency.exponentialRampToValueAtTime(80, now + 0.15);
+    gain.gain.setValueAtTime(0.25, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+    osc.start(now);
+    osc.stop(now + 0.15);
+  } else if (type === "blip") {
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(880, now);
+    gain.gain.setValueAtTime(0.12, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+    osc.start(now);
+    osc.stop(now + 0.05);
+  } else if (type === "unlock") {
+    const chords = [261.63, 329.63, 392.00, 523.25];
+    chords.forEach((freq, idx) => {
+      const o = actx.createOscillator();
+      const g = actx.createGain();
+      o.type = "triangle";
+      o.frequency.value = freq;
+      o.connect(g);
+      g.connect(actx.destination);
+      const st = now + (idx * 0.09);
+      g.gain.setValueAtTime(0.18, st);
+      g.gain.exponentialRampToValueAtTime(0.001, st + 0.4);
+      o.start(st);
+      o.stop(st + 0.4);
+    });
+  } else if (type === "type") {
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(1200 + Math.random() * 300, now);
+    gain.gain.setValueAtTime(0.04, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+    osc.start(now);
+    osc.stop(now + 0.035);
+  } else if (type === "batman") {
+    osc.type = "sawtooth";
+    osc.frequency.setValueAtTime(160, now);
+    osc.frequency.exponentialRampToValueAtTime(320, now + 0.12);
+    gain.gain.setValueAtTime(0.2, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+    osc.start(now);
+    osc.stop(now + 0.25);
+  } else if (type === "laser") {
+    osc.type = "sawtooth";
+    osc.frequency.setValueAtTime(880, now);
+    osc.frequency.exponentialRampToValueAtTime(220, now + 0.08);
+    gain.gain.setValueAtTime(0.12, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+    osc.start(now);
+    osc.stop(now + 0.08);
+  } else if (type === "boom") {
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(140, now);
+    osc.frequency.exponentialRampToValueAtTime(35, now + 0.22);
+    gain.gain.setValueAtTime(0.24, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+    osc.start(now);
+    osc.stop(now + 0.22);
+  } else if (type === "powerup") {
+    const notes = [440, 554.37, 659.25, 880];
+    notes.forEach((f, i) => {
+      const o = actx.createOscillator();
+      const g = actx.createGain();
+      o.type = "triangle";
+      o.frequency.value = f;
+      o.connect(g);
+      g.connect(actx.destination);
+      const st = now + i * 0.06;
+      g.gain.setValueAtTime(0.15, st);
+      g.gain.exponentialRampToValueAtTime(0.001, st + 0.2);
+      o.start(st);
+      o.stop(st + 0.2);
+    });
+  } else if (type === "combo") {
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(1046.50, now);
+    osc.frequency.setValueAtTime(1318.51, now + 0.05);
+    gain.gain.setValueAtTime(0.14, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+    osc.start(now);
+    osc.stop(now + 0.18);
+  }
+}
+
+// Romantic 8-Bit Chiptune Melody (Plays on Cassette)
+const MELODY = [
+  { f: 392.00, d: 0.35 },
+  { f: 440.00, d: 0.35 },
+  { f: 493.88, d: 0.35 },
+  { f: 587.33, d: 0.70 },
+  { f: 523.25, d: 0.35 },
+  { f: 493.88, d: 0.35 },
+  { f: 440.00, d: 0.70 },
+  { f: 392.00, d: 0.35 },
+  { f: 329.63, d: 0.70 },
+  { f: 392.00, d: 0.35 },
+  { f: 440.00, d: 0.70 },
+  { f: 493.88, d: 0.70 },
+  { f: 587.33, d: 0.70 },
+  { f: 659.25, d: 0.90 }
+];
+
+let melodyStep = 0;
+function playNextSynthNote() {
+  if (!isBgmPlaying || !soundEnabled) return;
+  initAudio();
+  if (!actx) return;
+
+  const note = MELODY[melodyStep];
+  melodyStep = (melodyStep + 1) % MELODY.length;
+
+  const now = actx.currentTime;
+  const osc = actx.createOscillator();
+  const bass = actx.createOscillator();
+  const gain = actx.createGain();
+
+  osc.type = "triangle";
+  osc.frequency.setValueAtTime(note.f, now);
+
+  bass.type = "sine";
+  bass.frequency.setValueAtTime(note.f / 2, now);
+
+  gain.gain.setValueAtTime(0.14, now);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + note.d);
+
+  osc.connect(gain);
+  bass.connect(gain);
+  gain.connect(actx.destination);
+
+  osc.start(now);
+  bass.start(now);
+  osc.stop(now + note.d);
+  bass.stop(now + note.d);
+
+  bgmInterval = setTimeout(playNextSynthNote, note.d * 1000);
+}
+
+function startBgm() {
+  const custom = $("customAudio");
+  if (custom && custom.src && !custom.paused) return;
+  if (isBgmPlaying) return;
+  isBgmPlaying = true;
+  melodyStep = 0;
+  playNextSynthNote();
+  if ($("playerBox")) $("playerBox").classList.add("playing");
+  if ($("playAudioBtn")) $("playAudioBtn").textContent = "Pause Song";
+}
+
+function stopBgm() {
+  isBgmPlaying = false;
+  if (bgmInterval) clearTimeout(bgmInterval);
+  const custom = $("customAudio");
+  if (custom) custom.pause();
+  if ($("playerBox")) $("playerBox").classList.remove("playing");
+  if ($("playAudioBtn")) $("playAudioBtn").textContent = "Play Song";
+}
+
+function toggleAudioPlayback() {
+  initAudio();
+  const custom = $("customAudio");
+  if (custom && custom.src && custom.src !== window.location.href) {
+    if (custom.paused) {
+      custom.play().then(() => {
+        isBgmPlaying = true;
+        if ($("playerBox")) $("playerBox").classList.add("playing");
+        if ($("playAudioBtn")) $("playAudioBtn").textContent = "Pause Song";
+      }).catch(err => {
+        startBgm();
+      });
+    } else {
+      custom.pause();
+      isBgmPlaying = false;
+      if ($("playerBox")) $("playerBox").classList.remove("playing");
+      if ($("playAudioBtn")) $("playAudioBtn").textContent = "Play Song";
+    }
+  } else {
+    if (isBgmPlaying) {
+      stopBgm();
+    } else {
+      startBgm();
+    }
+  }
+}
+
+// ============================================================
+// GAME STATE & NAVIGATION
+// ============================================================
+const screens = ["s0", "s1", "s2", "s3"];
+const show = id => screens.forEach(s => {
+  const el = $(s);
+  if (!el) return;
+  const active = s === id;
+  el.classList.toggle("on", active);
+  el.style.display = active ? "flex" : "none";
+});
+const field = $("field");
+let got = 0, dropTimer = null, qi = 0, typing = null;
+
+function initBarSegments() {
+  const barEl = $("bar");
+  if (!barEl) return;
+  barEl.innerHTML = "";
+  for (let t = 0; t < 24; t++) {
+    const seg = document.createElement("div");
+    seg.className = "bar-segment";
+    barEl.appendChild(seg);
+  }
+}
+
+function setBar(p) {
+  const segs = document.querySelectorAll(".bar-segment");
+  if (!segs.length) return;
+  const count = Math.round((p / 100) * segs.length);
+  segs.forEach((s, idx) => {
+    s.classList.toggle("filled", idx < count);
+  });
+}
+function setHR(t, icon) {
+  const e = $("hr");
+  e.textContent = "";
+  if (icon) {
+    e.append(img(icon, 2), document.createTextNode(" " + t));
+  } else e.textContent = t;
+}
+
+// ============================================================
+// SCENE 1: CINEMA BLASTER ARCADE SHOOTER
+// ============================================================
+const WIN_SCORE = 1200;
+let arcadeCanvas = null;
+let actx2d = null;
+let arcadeLoop = null;
+let autoFireEnabled = true;
+let isPointerHeld = false;
+
+// Offscreen sprite caches
+let sprShip = null;
+let sprTomato = null;
+let sprClapper = null;
+let sprOscar = null;
+let sprPopcorn = null;
+let sprHeart = null;
+
+function createOffscreenCanvas(matrix, scale = 3) {
+  const h = matrix.length;
+  const w = matrix[0].length;
+  const c = document.createElement("canvas");
+  c.width = w * scale;
+  c.height = h * scale;
+  const ctx = c.getContext("2d");
+  ctx.imageSmoothingEnabled = false;
+  for (let y = 0; y < h; y++) {
+    const row = matrix[y];
+    for (let x = 0; x < w; x++) {
+      const ch = row[x];
+      if (ch !== "." && PAL[ch]) {
+        ctx.fillStyle = PAL[ch];
+        ctx.fillRect(x * scale, y * scale, scale, scale);
+      }
+    }
+  }
+  return c;
+}
+
+function initBlasterSprites() {
+  if (sprShip) return;
+  sprShip = createOffscreenCanvas(BAT_SHIP, 3.2);
+  sprTomato = createOffscreenCanvas(TOMATO, 3);
+  sprClapper = createOffscreenCanvas(CLAPPER, 2.7);
+  sprOscar = createOffscreenCanvas(OSCAR, 2.4);
+  sprPopcorn = createOffscreenCanvas(POPCORN, 2.8);
+  sprHeart = createOffscreenCanvas(H, 2.8);
+}
+
+const blaster = {
+  active: false,
+  score: 0,
+  bestScore: parseInt(localStorage.getItem("sudeepCinemaBlasterBest") || "0", 10),
+  lives: 3,
+  shield: false,
+  weaponLevel: 1,
+  bombs: 1,
+  combo: 1,
+  comboTimer: 0,
+  screenShake: 0,
+  isCleared: false,
+  isEndless: false,
+  ship: { x: 0, y: 0, targetX: 0, targetY: 0, w: 38, h: 35, invuln: 0 },
+  lasers: [],
+  enemies: [],
+  pickups: [],
+  particles: [],
+  floaters: [],
+  stars: [],
+  spawnCounter: 0,
+  lastShootTime: 0,
+  keys: { left: false, right: false, up: false, down: false, fire: false }
+};
+
+function startHearts() {
+  initAudio();
+  sfx("blip");
+  show("s1");
+  if ($("screen0Props")) $("screen0Props").style.display = "none";
+  if ($("roamActors")) $("roamActors").style.display = "";
+  $("hl").textContent = "Cinema Blaster";
+  initBlasterSprites();
+  initBlasterGame();
+}
+
+function initBlasterGame(isRetry = false) {
+  arcadeCanvas = $("arcadeCanvas");
+  if (!arcadeCanvas) return;
+  
+  const f = $("field");
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const w = f.clientWidth || 320;
+  const h = f.clientHeight || 420;
+  
+  arcadeCanvas.width = w * dpr;
+  arcadeCanvas.height = h * dpr;
+  arcadeCanvas.style.width = w + "px";
+  arcadeCanvas.style.height = h + "px";
+  
+  actx2d = arcadeCanvas.getContext("2d");
+  actx2d.scale(dpr, dpr);
+  actx2d.imageSmoothingEnabled = false;
+
+  // Reset state
+  blaster.active = true;
+  blaster.score = isRetry ? 0 : (blaster.isEndless ? blaster.score : 0);
+  blaster.lives = 3;
+  blaster.shield = false;
+  blaster.weaponLevel = 1;
+  blaster.bombs = 1;
+  blaster.combo = 1;
+  blaster.comboTimer = 0;
+  blaster.screenShake = 0;
+  blaster.isCleared = false;
+  blaster.lasers = [];
+  blaster.enemies = [];
+  blaster.pickups = [];
+  blaster.particles = [];
+  blaster.floaters = [];
+  blaster.spawnCounter = 0;
+  blaster.lastShootTime = 0;
+
+  // Center ship
+  blaster.ship.x = w / 2 - blaster.ship.w / 2;
+  blaster.ship.y = h - 55;
+  blaster.ship.targetX = blaster.ship.x;
+  blaster.ship.targetY = blaster.ship.y;
+  blaster.ship.invuln = 0;
+
+  // Generate Starfield
+  blaster.stars = [];
+  for (let i = 0; i < 40; i++) {
+    blaster.stars.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      speed: 0.8 + Math.random() * 3.2,
+      size: Math.random() > 0.8 ? 2 : 1,
+      col: Math.random() > 0.5 ? "#ffffff" : (Math.random() > 0.5 ? "#ffd35c" : "#ff4f8b")
+    });
+  }
+
+  // Update HUD
+  updateBlasterHUD();
+  $("arcadeOverlay").classList.add("hidden");
+  
+  // Set progress bar
+  setBar(0);
+  setHR("0/" + WIN_SCORE, H);
+
+  // Bind controls once
+  bindArcadeControls();
+
+  // Run loop
+  if (arcadeLoop) cancelAnimationFrame(arcadeLoop);
+  arcadeLoop = requestAnimationFrame(blasterFrame);
+}
+
+function updateBlasterHUD() {
+  const pad = n => String(Math.floor(n)).padStart(6, "0");
+  $("hudScore").textContent = pad(blaster.score);
+  $("hudBest").textContent = pad(Math.max(blaster.score, blaster.bestScore));
+  
+  let heartsStr = "";
+  if (blaster.shield) heartsStr += "[SHIELD] ";
+  for (let i = 0; i < blaster.lives; i++) heartsStr += "I";
+  $("hudLives").textContent = heartsStr || "0";
+
+  const wNames = ["L1 DUAL", "L2 TRIPLE", "L3 OVERDRIVE"];
+  $("hudWeapon").textContent = wNames[blaster.weaponLevel - 1] || "L3 OVERDRIVE";
+  $("hudCombo").textContent = blaster.combo > 1 ? `x${blaster.combo}!` : "x1";
+  $("bombCount").textContent = blaster.bombs;
+}
+
+function spawnBlasterFloater(x, y, text, color) {
+  blaster.floaters.push({
+    x, y, text, color,
+    life: 38,
+    maxLife: 38,
+    vy: -1.4
+  });
+}
+
+function burstBlasterParticles(x, y, col, count = 12) {
+  for (let i = 0; i < count; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const spd = 1.2 + Math.random() * 4.5;
+    blaster.particles.push({
+      x, y,
+      vx: Math.cos(angle) * spd,
+      vy: Math.sin(angle) * spd,
+      color: col,
+      size: 2 + Math.floor(Math.random() * 3),
+      life: 22 + Math.floor(Math.random() * 14),
+      maxLife: 36
+    });
+  }
+}
+
+function triggerBomb() {
+  if (blaster.bombs <= 0 || !blaster.active) return;
+  blaster.bombs--;
+  updateBlasterHUD();
+  sfx("boom");
+  blaster.screenShake = 18;
+
+  const f = $("field");
+  const w = f.clientWidth || 320;
+  const h = f.clientHeight || 420;
+
+  // Blast all enemies
+  for (const en of blaster.enemies) {
+    burstBlasterParticles(en.x + en.w / 2, en.y + en.h / 2, "#ffd35c", 16);
+    blaster.score += (en.type === "clapper" ? 150 : 60) * Math.min(5, blaster.combo);
+  }
+  blaster.enemies = [];
+
+  // Giant flash particles
+  burstBlasterParticles(w / 2, h / 2, "#ff4f8b", 32);
+  burstBlasterParticles(w / 2, h / 2, "#ffd35c", 32);
+  spawnBlasterFloater(w / 2 - 60, h / 2, "SMART BOMB!", "#ffd35c");
+  updateBlasterHUD();
+}
+
+function fireBlasterLasers() {
+  const s = blaster.ship;
+  sfx("laser");
+
+  if (blaster.weaponLevel === 1) {
+    // Dual Wing Lasers
+    blaster.lasers.push({ x: s.x + 6,  y: s.y + 4, vx: 0, vy: -15, w: 3, h: 10, col: "#ff4f8b" });
+    blaster.lasers.push({ x: s.x + s.w - 9, y: s.y + 4, vx: 0, vy: -15, w: 3, h: 10, col: "#ff4f8b" });
+  } else if (blaster.weaponLevel === 2) {
+    // Triple Spread
+    blaster.lasers.push({ x: s.x + s.w / 2 - 1.5, y: s.y, vx: 0, vy: -15, w: 4, h: 12, col: "#ffd35c" });
+    blaster.lasers.push({ x: s.x + 4, y: s.y + 4, vx: -2.8, vy: -14, w: 3, h: 10, col: "#42d4f4" });
+    blaster.lasers.push({ x: s.x + s.w - 7, y: s.y + 4, vx: 2.8, vy: -14, w: 3, h: 10, col: "#42d4f4" });
+  } else {
+    // Overdrive 5-way Plasma
+    blaster.lasers.push({ x: s.x + s.w / 2 - 2, y: s.y, vx: 0, vy: -16, w: 5, h: 14, col: "#ffffff" });
+    blaster.lasers.push({ x: s.x + 7, y: s.y + 4, vx: -2.4, vy: -15, w: 3, h: 11, col: "#ffd35c" });
+    blaster.lasers.push({ x: s.x + s.w - 10, y: s.y + 4, vx: 2.4, vy: -15, w: 3, h: 11, col: "#ffd35c" });
+    blaster.lasers.push({ x: s.x + 2, y: s.y + 8, vx: -4.8, vy: -13, w: 3, h: 9, col: "#ff4f8b" });
+    blaster.lasers.push({ x: s.x + s.w - 5, y: s.y + 8, vx: 4.8, vy: -13, w: 3, h: 9, col: "#ff4f8b" });
+  }
+}
+
+function blasterFrame(ts) {
+  if (!blaster.active) return;
+  const f = $("field");
+  const cw = f.clientWidth || 320;
+  const ch = f.clientHeight || 420;
+
+  // 1. Move stars
+  for (const st of blaster.stars) {
+    st.y += st.speed;
+    if (st.y > ch) {
+      st.y = -4;
+      st.x = Math.random() * cw;
+    }
+  }
+
+  // 2. Player Movement
+  const s = blaster.ship;
+  // Keyboard steering
+  if (blaster.keys.left) s.targetX -= 7;
+  if (blaster.keys.right) s.targetX += 7;
+  if (blaster.keys.up) s.targetY -= 6;
+  if (blaster.keys.down) s.targetY += 6;
+
+  // Clamp targets
+  s.targetX = Math.max(4, Math.min(cw - s.w - 4, s.targetX));
+  s.targetY = Math.max(ch * 0.45, Math.min(ch - s.h - 8, s.targetY));
+
+  // Smooth interpolation
+  s.x += (s.targetX - s.x) * 0.35;
+  s.y += (s.targetY - s.y) * 0.35;
+
+  if (s.invuln > 0) s.invuln--;
+
+  // 3. Auto / Manual Firing
+  const shootInterval = blaster.weaponLevel === 3 ? 100 : (blaster.weaponLevel === 2 ? 140 : 170);
+  if ((autoFireEnabled || isPointerHeld || blaster.keys.fire) && (ts - blaster.lastShootTime > shootInterval)) {
+    fireBlasterLasers();
+    blaster.lastShootTime = ts;
+  }
+
+  // 4. Update Lasers
+  for (let i = blaster.lasers.length - 1; i >= 0; i--) {
+    const l = blaster.lasers[i];
+    l.x += l.vx;
+    l.y += l.vy;
+    if (l.y < -15 || l.x < -10 || l.x > cw + 10) {
+      blaster.lasers.splice(i, 1);
+    }
+  }
+
+  // 5. Spawn Enemies & Pickups
+  blaster.spawnCounter++;
+  const spawnRate = Math.max(26, 52 - Math.floor(blaster.score / 280));
+  if (blaster.spawnCounter >= spawnRate) {
+    blaster.spawnCounter = 0;
+    const roll = Math.random();
+    
+    if (roll < 0.58) {
+      // Rotten Tomato (hp: 1, points: 50)
+      blaster.enemies.push({
+        type: "tomato",
+        x: 10 + Math.random() * (cw - 45),
+        y: -35,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: 2.4 + Math.random() * 1.6,
+        w: 33,
+        h: 30,
+        hp: 1,
+        maxHp: 1,
+        hitFlash: 0
+      });
+    } else if (roll < 0.80) {
+      // Spoiler Clapperboard (hp: 2, points: 150)
+      blaster.enemies.push({
+        type: "clapper",
+        x: 10 + Math.random() * (cw - 50),
+        y: -35,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: 1.8 + Math.random() * 1.2,
+        w: 36,
+        h: 26,
+        hp: 2,
+        maxHp: 2,
+        hitFlash: 0
+      });
+    } else if (roll < 0.90) {
+      // Oscar Trophy (+250 points bonus)
+      blaster.pickups.push({
+        type: "oscar",
+        x: 15 + Math.random() * (cw - 45),
+        y: -40,
+        vy: 1.6,
+        w: 22,
+        h: 38,
+        angle: 0
+      });
+    } else if (roll < 0.96) {
+      // Popcorn Powerup (Upgrade Weapon)
+      blaster.pickups.push({
+        type: "popcorn",
+        x: 15 + Math.random() * (cw - 45),
+        y: -40,
+        vy: 1.5,
+        w: 30,
+        h: 30,
+        angle: 0
+      });
+    } else {
+      // Heart Shield
+      blaster.pickups.push({
+        type: "heart",
+        x: 15 + Math.random() * (cw - 45),
+        y: -40,
+        vy: 1.5,
+        w: 30,
+        h: 28,
+        angle: 0
+      });
+    }
+  }
+
+  // 6. Update Enemies
+  for (let i = blaster.enemies.length - 1; i >= 0; i--) {
+    const en = blaster.enemies[i];
+    en.x += en.vx;
+    en.y += en.vy;
+    if (en.hitFlash > 0) en.hitFlash--;
+
+    // Bounce off edges
+    if (en.x < 4 || en.x > cw - en.w - 4) en.vx *= -1;
+
+    // Check collision with Lasers
+    for (let j = blaster.lasers.length - 1; j >= 0; j--) {
+      const l = blaster.lasers[j];
+      if (l.x + l.w > en.x && l.x < en.x + en.w && l.y + l.h > en.y && l.y < en.y + en.h) {
+        blaster.lasers.splice(j, 1);
+        en.hp--;
+        en.hitFlash = 4;
+        
+        if (en.hp <= 0) {
+          // Enemy Destroyed
+          const pts = (en.type === "clapper" ? 150 : 60) * Math.min(5, blaster.combo);
+          blaster.score += pts;
+          blaster.combo++;
+          blaster.comboTimer = 140;
+
+          burstBlasterParticles(en.x + en.w / 2, en.y + en.h / 2, en.type === "clapper" ? "#ffd35c" : "#ff3b7c", 14);
+          spawnBlasterFloater(en.x, en.y, `+${pts}!`, en.type === "clapper" ? "#ffd35c" : "#ff8eb2");
+          
+          if (blaster.combo % 3 === 0) {
+            sfx("combo");
+            spawnBlasterFloater(cw / 2 - 40, ch * 0.4, `COMBO x${blaster.combo}!`, "#ffd35c");
+          } else {
+            sfx(en.type === "clapper" ? "boom" : "popcorn");
+          }
+
+          blaster.screenShake = 6;
+          blaster.enemies.splice(i, 1);
+          checkBlasterMilestones();
+          break;
+        } else {
+          sfx("blip");
+          burstBlasterParticles(l.x, l.y, "#ffffff", 4);
+        }
+      }
+    }
+
+    // Check collision with Player Ship
+    if (blaster.ship.invuln <= 0 && en.x + en.w > s.x + 4 && en.x < s.x + s.w - 4 && en.y + en.h > s.y + 4 && en.y < s.y + s.h - 4) {
+      blaster.enemies.splice(i, 1);
+      burstBlasterParticles(en.x + en.w / 2, en.y + en.h / 2, "#ff3b7c", 18);
+      
+      if (blaster.shield) {
+        blaster.shield = false;
+        blaster.ship.invuln = 50;
+        blaster.screenShake = 10;
+        sfx("popcorn");
+        spawnBlasterFloater(s.x, s.y - 15, "SHIELD BROKEN", "#42d4f4");
+      } else {
+        blaster.lives--;
+        blaster.combo = 1;
+        blaster.ship.invuln = 80;
+        blaster.screenShake = 16;
+        sfx("hurt");
+        spawnBlasterFloater(s.x, s.y - 15, "-1 LIFE", "#ff4f8b");
+        
+        if (blaster.lives <= 0) {
+          handleBlasterGameOver();
+          return;
+        }
+      }
+      updateBlasterHUD();
+      continue;
+    }
+
+    // Off screen bottom
+    if (en.y > ch + 40) {
+      blaster.enemies.splice(i, 1);
+    }
+  }
+
+  // 7. Update Pickups
+  for (let i = blaster.pickups.length - 1; i >= 0; i--) {
+    const p = blaster.pickups[i];
+    p.y += p.vy;
+
+    // Check pickup by Ship
+    if (p.x + p.w > s.x && p.x < s.x + s.w && p.y + p.h > s.y && p.y < s.y + s.h) {
+      if (p.type === "oscar") {
+        const pts = 250 * Math.min(5, blaster.combo);
+        blaster.score += pts;
+        blaster.combo++;
+        blaster.comboTimer = 140;
+        sfx("powerup");
+        burstBlasterParticles(p.x + p.w / 2, p.y + p.h / 2, "#ffd35c", 16);
+        spawnBlasterFloater(p.x, p.y, `+${pts} OSCAR!`, "#ffd35c");
+      } else if (p.type === "popcorn") {
+        blaster.weaponLevel = Math.min(3, blaster.weaponLevel + 1);
+        sfx("powerup");
+        burstBlasterParticles(p.x + p.w / 2, p.y + p.h / 2, "#ffd35c", 16);
+        const wTitle = blaster.weaponLevel === 3 ? "5-WAY OVERDRIVE!" : "TRIPLE LASER!";
+        spawnBlasterFloater(p.x - 20, p.y, wTitle, "#ffd35c");
+      } else if (p.type === "heart") {
+        if (!blaster.shield) {
+          blaster.shield = true;
+          spawnBlasterFloater(p.x, p.y, "SHIELD ON", "#42d4f4");
+        } else {
+          blaster.lives = Math.min(3, blaster.lives + 1);
+          spawnBlasterFloater(p.x, p.y, "+1 LIFE", "#ff8eb2");
+        }
+        sfx("heart");
+        burstBlasterParticles(p.x + p.w / 2, p.y + p.h / 2, "#ff4f8b", 16);
+      }
+      blaster.pickups.splice(i, 1);
+      updateBlasterHUD();
+      checkBlasterMilestones();
+      continue;
+    }
+
+    if (p.y > ch + 40) {
+      blaster.pickups.splice(i, 1);
+    }
+  }
+
+  // 8. Update Combo Timer
+  if (blaster.comboTimer > 0) {
+    blaster.comboTimer--;
+    if (blaster.comboTimer === 0) {
+      blaster.combo = 1;
+      updateBlasterHUD();
+    }
+  }
+
+  // 9. Update Particles
+  for (let i = blaster.particles.length - 1; i >= 0; i--) {
+    const pt = blaster.particles[i];
+    pt.x += pt.vx;
+    pt.y += pt.vy;
+    pt.life--;
+    if (pt.life <= 0) blaster.particles.splice(i, 1);
+  }
+
+  // 10. Update Floaters
+  for (let i = blaster.floaters.length - 1; i >= 0; i--) {
+    const fl = blaster.floaters[i];
+    fl.y += fl.vy;
+    fl.life--;
+    if (fl.life <= 0) blaster.floaters.splice(i, 1);
+  }
+
+  // 11. Render Frame
+  renderBlasterFrame(cw, ch);
+
+  arcadeLoop = requestAnimationFrame(blasterFrame);
+}
+
+function renderBlasterFrame(cw, ch) {
+  const ctx = actx2d;
+  ctx.save();
+
+  // Screen shake
+  if (blaster.screenShake > 0) {
+    ctx.translate((Math.random() - 0.5) * blaster.screenShake, (Math.random() - 0.5) * blaster.screenShake);
+    blaster.screenShake *= 0.88;
+    if (blaster.screenShake < 0.5) blaster.screenShake = 0;
+  }
+
+  // Background
+  ctx.fillStyle = "#0a0414";
+  ctx.fillRect(0, 0, cw, ch);
+
+  // Stars
+  for (const st of blaster.stars) {
+    ctx.fillStyle = st.col;
+    ctx.fillRect(st.x, st.y, st.size, st.size);
+  }
+
+  // Lasers
+  for (const l of blaster.lasers) {
+    ctx.fillStyle = l.col;
+    ctx.fillRect(l.x, l.y, l.w, l.h);
+  }
+
+  // Enemies
+  for (const en of blaster.enemies) {
+    const spr = en.type === "clapper" ? sprClapper : sprTomato;
+    if (en.hitFlash > 0) {
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(en.x, en.y, en.w, en.h);
+    } else if (spr) {
+      ctx.drawImage(spr, en.x, en.y);
+    }
+  }
+
+  // Pickups
+  for (const p of blaster.pickups) {
+    const spr = p.type === "oscar" ? sprOscar : (p.type === "popcorn" ? sprPopcorn : sprHeart);
+    if (spr) {
+      ctx.drawImage(spr, p.x, p.y);
+    }
+  }
+
+  // Player Ship
+  const s = blaster.ship;
+  if (s.invuln <= 0 || Math.floor(s.invuln / 5) % 2 === 0) {
+    // Engine flame
+    const flameH = 6 + Math.floor(Math.random() * 8);
+    ctx.fillStyle = Math.random() > 0.4 ? "#ffd35c" : "#ff4f8b";
+    ctx.fillRect(s.x + 13, s.y + s.h - 2, 4, flameH);
+    ctx.fillRect(s.x + s.w - 17, s.y + s.h - 2, 4, flameH);
+
+    // Ship Sprite
+    if (sprShip) ctx.drawImage(sprShip, s.x, s.y);
+
+    // Shield Aura
+    if (blaster.shield) {
+      ctx.strokeStyle = Math.random() > 0.5 ? "#42d4f4" : "#ff4f8b";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.arc(s.x + s.w / 2, s.y + s.h / 2, 26, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+
+  // Particles
+  for (const pt of blaster.particles) {
+    ctx.fillStyle = pt.color;
+    ctx.globalAlpha = pt.life / pt.maxLife;
+    ctx.fillRect(pt.x, pt.y, pt.size, pt.size);
+  }
+  ctx.globalAlpha = 1.0;
+
+  // Floaters
+  ctx.font = '10px "Press Start 2P", monospace';
+  for (const fl of blaster.floaters) {
+    ctx.fillStyle = fl.color;
+    ctx.globalAlpha = fl.life / fl.maxLife;
+    ctx.fillText(fl.text, fl.x, fl.y);
+  }
+  ctx.globalAlpha = 1.0;
+
+  ctx.restore();
+}
+
+function checkBlasterMilestones() {
+  updateBlasterHUD();
+
+  // Progress Bar
+  const prog = Math.min(33, (blaster.score / WIN_SCORE) * 33);
+  setBar(prog);
+  setHR(Math.min(WIN_SCORE, blaster.score) + "/" + WIN_SCORE, H);
+
+  // Victory Condition
+  if (blaster.score >= WIN_SCORE && !blaster.isCleared) {
+    blaster.isCleared = true;
+    sfx("unlock");
+    
+    // Save personal best
+    if (blaster.score > blaster.bestScore) {
+      blaster.bestScore = blaster.score;
+      localStorage.setItem("sudeepCinemaBlasterBest", String(blaster.bestScore));
+    }
+
+    // Confetti
+    const f = $("field");
+    burstBlasterParticles(f.clientWidth / 2, f.clientHeight / 2, "#ffd35c", 30);
+    burstBlasterParticles(f.clientWidth / 2, f.clientHeight / 2, "#ff4f8b", 30);
+
+    // Show Overlay
+    $("overlayTitle").textContent = "LEVEL CLEARED";
+    $("overlaySub").textContent = "You cleared every wave. Ready for the questions?";
+    $("btnNextScene").textContent = "Continue";
+    $("btnPlayAgain").textContent = "Endless Mode";
+    $("arcadeOverlay").classList.remove("hidden");
+  }
+}
+
+function handleBlasterGameOver() {
+  blaster.active = false;
+  cancelAnimationFrame(arcadeLoop);
+
+  if (blaster.score > blaster.bestScore) {
+    blaster.bestScore = blaster.score;
+    localStorage.setItem("sudeepCinemaBlasterBest", String(blaster.bestScore));
+  }
+
+  $("overlayTitle").textContent = "GAME OVER";
+  $("overlaySub").textContent = "Want to give it another shot?";
+  $("btnNextScene").textContent = "Try Again";
+  $("btnPlayAgain").style.display = "none";
+  $("arcadeOverlay").classList.remove("hidden");
+}
+
+let controlsBound = false;
+function bindArcadeControls() {
+  if (controlsBound) return;
+  controlsBound = true;
+
+  const canvas = $("arcadeCanvas");
+
+  // Pointer / Touch / Mouse steering
+  canvas.addEventListener("pointerdown", e => {
+    e.preventDefault();
+    initAudio();
+    isPointerHeld = true;
+    const r = canvas.getBoundingClientRect();
+    blaster.ship.targetX = e.clientX - r.left - blaster.ship.w / 2;
+    blaster.ship.targetY = Math.max(canvas.clientHeight * 0.45, Math.min(canvas.clientHeight - 48, e.clientY - r.top - blaster.ship.h / 2));
+  });
+
+  window.addEventListener("pointermove", e => {
+    if (!blaster.active) return;
+    const r = canvas.getBoundingClientRect();
+    if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) {
+      blaster.ship.targetX = e.clientX - r.left - blaster.ship.w / 2;
+      blaster.ship.targetY = Math.max(canvas.clientHeight * 0.45, Math.min(canvas.clientHeight - 48, e.clientY - r.top - blaster.ship.h / 2));
+    }
+  });
+
+  window.addEventListener("pointerup", () => isPointerHeld = false);
+  window.addEventListener("pointercancel", () => isPointerHeld = false);
+
+  // Keyboard controls
+  window.addEventListener("keydown", e => {
+    if (!blaster.active) return;
+    if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") blaster.keys.left = true;
+    if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") blaster.keys.right = true;
+    if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") blaster.keys.up = true;
+    if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") blaster.keys.down = true;
+    if (e.key === " " || e.key === "Enter") {
+      e.preventDefault();
+      blaster.keys.fire = true;
+    }
+    if (e.key === "b" || e.key === "B") {
+      triggerBomb();
+    }
+  });
+
+  window.addEventListener("keyup", e => {
+    if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") blaster.keys.left = false;
+    if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") blaster.keys.right = false;
+    if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") blaster.keys.up = false;
+    if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") blaster.keys.down = false;
+    if (e.key === " " || e.key === "Enter") blaster.keys.fire = false;
+  });
+
+  // Bomb button
+  $("btnBomb").onclick = triggerBomb;
+
+  // Auto fire toggle
+  $("btnAutoFire").onclick = () => {
+    autoFireEnabled = !autoFireEnabled;
+    $("btnAutoFire").textContent = autoFireEnabled ? "AUTO: ON" : "AUTO: OFF";
+    sfx("blip");
+  };
+
+  // Overlay Buttons
+  $("btnNextScene").onclick = () => {
+    if ($("overlayTitle").textContent.includes("GAME OVER")) {
+      // Retry
+      initBlasterGame(true);
+    } else {
+      // Advance to Scene 2
+      blaster.active = false;
+      cancelAnimationFrame(arcadeLoop);
+      qi = 0;
+      startQuestions();
+    }
+  };
+
+  $("btnPlayAgain").onclick = () => {
+    // Endless mode
+    blaster.isEndless = true;
+    $("arcadeOverlay").classList.add("hidden");
+    spawnBlasterFloater(canvas.clientWidth / 2 - 50, canvas.clientHeight / 2, "ENDLESS ENGAGED!", "#ffd35c");
+  };
+}
+
+// ============================================================
+// SCENE 2: THE INTERVIEW / QUESTIONS
+// ============================================================
+function startQuestions() {
+  show("s2");
+  const Q = QUESTIONS[qi];
+  $("hl").textContent = "The Interview";
+  setHR("Take " + (qi + 1) + "/" + QUESTIONS.length);
+  setBar(33 + (qi / QUESTIONS.length) * 33);
+  $("qtext").textContent = Q.q;
+  $("say").textContent = "";
+
+  const box = $("opts");
+  box.innerHTML = "";
+
+  Q.opts.forEach(o => {
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.textContent = o.t;
+
+    if (o.run) {
+      const dodge = () => {
+        sfx("blip");
+        b.style.transform = "translate(" + Math.round((Math.random() - .5) * 150) + "px," + Math.round((Math.random() - .5) * 80) + "px)";
+      };
+      b.addEventListener("pointerenter", dodge);
+      b.addEventListener("pointerdown", e => {
+        e.preventDefault();
+        dodge();
+      });
+    }
+
+    b.addEventListener("click", () => answer(b, o));
+    box.append(b);
+  });
+}
+
+function answer(b, o) {
+  initAudio();
+  $("say").textContent = o.say;
+
+  if (!o.ok) {
+    sfx("hurt");
+    b.classList.remove("bad");
+    void b.offsetWidth;
+    b.classList.add("bad");
+    return;
+  }
+
+  sfx("popcorn");
+  b.classList.add("good");
+  document.querySelectorAll(".opt").forEach(x => x.disabled = true);
+
+  setTimeout(() => {
+    qi++;
+    if (qi < QUESTIONS.length) {
+      startQuestions();
+    } else {
+      unlockScreen();
+    }
+  }, 1100);
+}
+
+// ============================================================
+// SCENE 3: THE PREMIERE VAULT (LOCK & CASSETTE AUDIO)
+// ============================================================
+function setLock(open) {
+  const l = $("lock");
+  l.textContent = "";
+  l.append(img(open ? LOCKO : LOCK, 9));
+  l.classList.toggle("open", open);
+}
+
+function unlockScreen() {
+  show("s3");
+  setBar(66);
+  $("hl").textContent = "The Vault";
+  setHR("");
+  setLock(false);
+  $("lock").style.display = "";
+  $("lt").style.display = "";
+  $("lp").style.display = "";
+  if ($("playerBox")) $("playerBox").style.display = "none";
+  $("letterEntourage").style.display = "none";
+  $("letter").style.display = "none";
+  $("moviePass").style.display = "none";
+  $("sign").style.display = "none";
+}
+
+function revealLetterAndAudio() {
+  initAudio();
+  sfx("unlock");
+  setLock(true);
+  setBar(100);
+  floaters();
+
+  setTimeout(() => {
+    $("lock").style.display = "none";
+    $("lt").style.display = "none";
+    $("lp").style.display = "none";
+    $("hl").textContent = "For Sudeep";
+    setHR("", H);
+
+    if ($("playerBox")) $("playerBox").style.display = "none";
+    $("letterEntourage").style.display = "flex";
+
+    const L = $("letter");
+    L.style.display = "block";
+    L.textContent = "";
+
+    const greeting = HIS_NAME ? "Dear " + HIS_NAME + "," : "Hey you,";
+    const signoff = MY_NAME ? "With all my love,\n" + MY_NAME : "Yours, always";
+    const full = greeting + "\n\n" + MESSAGE + "\n\n" + signoff;
+
+    let i = 0;
+    clearInterval(typing);
+    clearTimeout(typing);
+    const finishTyping = () => {
+      clearInterval(typing);
+      clearTimeout(typing);
+      L.textContent = full;
+      $("moviePass").style.display = "block";
+      $("sign").style.display = "flex";
+    };
+
+    // Fast, crisp typewriter effect
+    typing = setInterval(() => {
+      i += 1;
+      L.textContent = full.slice(0, i) + (i < full.length ? "_" : "");
+      L.scrollTop = L.scrollHeight;
+      if (i % 3 === 0) sfx("type");
+      if (i >= full.length) finishTyping();
+    }, 14);
+
+    L.onclick = finishTyping;
+  }, 700);
+}
+
+function floaters() {
+  for (let i = 0; i < 24; i++) {
+    const isStar = Math.random() > 0.6;
+    const f = img(isStar ? STAR : H, 3 + Math.floor(Math.random() * 3));
+    f.className = "px float";
+    f.style.left = Math.random() * 92 + "%";
+    f.style.animationDuration = (3 + Math.random() * 2.5) + "s";
+    f.style.animationDelay = (Math.random() * 0.8) + "s";
+    f.style.animationTimingFunction = "steps(30)";
+    document.body.append(f);
+    setTimeout(() => f.remove(), 7000);
+  }
+}
+
+// ============================================================
+// INITIALIZE SPRITES & EVENT HANDLERS
+// ============================================================
+initBarSegments();
+setBar(38);
+
+$("bearIntro").append(img(BEAR_3D, 5.8));
+$("who").append(img(BEAR_3D, 5));
+
+// Inject Screen 0 Ground & Sky Props (Exact match to reference photo!)
+if ($("sprBaleHero")) $("sprBaleHero").append(img(BALE, 3.2));
+if ($("sprPopcornHero")) $("sprPopcornHero").append(img(POPCORN, 3.2));
+if ($("sprHardyHero")) $("sprHardyHero").append(img(HARDY, 3.2));
+if ($("sprOscarHero")) $("sprOscarHero").append(img(OSCAR, 2.8));
+if ($("sprJakeHero")) $("sprJakeHero").append(img(JAKE, 3.2));
+if ($("sprBatmanHero")) $("sprBatmanHero").append(img(BATMAN, 3.2));
+
+// Teddy interactive click dance jump
+$("bearIntro").onclick = () => {
+  initAudio();
+  sfx("heart");
+  $("bearIntro").style.transform = "scale(1.22) translateY(-14px) rotate(12deg)";
+  setTimeout(() => { $("bearIntro").style.transform = ""; }, 220);
+};
+$("who").onclick = () => {
+  initAudio();
+  sfx("popcorn");
+  $("who").style.transform = "scale(1.2) translateY(-8px) rotate(-10deg)";
+  setTimeout(() => { $("who").style.transform = ""; }, 200);
+};
+
+// Inject Handcrafted Roaming Actors into Background (Scale 3.5 for great visibility)
+$("sprJake").append(img(JAKE, 3.5));
+$("sprHardy").append(img(HARDY, 3.5));
+$("sprBale").append(img(BALE, 3.5));
+$("sprBatman").append(img(BATMAN, 3.5));
+
+// Inject into Final Screening Entourage Row
+$("endHardySpr").append(img(HARDY, 2.6));
+$("endJakeSpr").append(img(JAKE, 2.6));
+$("endBaleSpr").append(img(BALE, 2.6));
+$("endBatmanSpr").append(img(BATMAN, 2.6));
+
+// ============================================================
+// CHARACTER DIALOGUES (CYCLES ON EVERY CLICK!)
+// ============================================================
+const ACTOR_LINES = {
+  hardy: [
+    "Reggie Kray brought you flowers, mate. Soften up!",
+    "A proper gentleman forgives a sweet apology.",
+    "Flowers for Sudeep. Take them!",
+    "Look at this bouquet, mate. She put real heart into this.",
+    "Don't keep a good girl waiting. Hug her!"
+  ],
+  jake: [
+    "I'm just walking and vibing to her soundtrack.",
+    "This track is elite. Forgive her, man!",
+    "No notes. Just pure cinema romance.",
+    "Dancing through the city until you two make up.",
+    "Can we queue up our next movie marathon already?"
+  ],
+  bale: [
+    "Look at that subtle coloring... the tasteful thickness of this apology.",
+    "Impressive. Very nice. Now accept her apology, Sudeep.",
+    "Patrick Bateman approves this relationship.",
+    "I have to return some videotapes... but first, forgive Anusha.",
+    "Even Paul Allen never received an apology this good."
+  ],
+  batman: [
+    "I'm Batman. Even the Dark Knight says forgive her.",
+    "I only work in black. And sometimes pink apologies.",
+    "Gotham needs peace, and so does this relationship.",
+    "Justice has been served. Hug her already.",
+    "Who's the greatest couple in the universe? You guys."
+  ]
+};
+
+let bubbleTimeout = null;
+const lineIndices = { bale: 0, jake: 0, hardy: 0, batman: 0 };
+
+function popActorSpeech(actorKey, x, y) {
+  initAudio();
+  sfx(actorKey === "batman" ? "batman" : (actorKey === "hardy" ? "popcorn" : "blip"));
+
+  const existing = document.querySelector(".actor-bubble");
+  if (existing) existing.remove();
+  if (bubbleTimeout) clearTimeout(bubbleTimeout);
+
+  const lines = ACTOR_LINES[actorKey];
+  const text = lines[lineIndices[actorKey] % lines.length];
+  lineIndices[actorKey]++; // advances to next dialogue on every click!
+
+  const bubble = document.createElement("div");
+  bubble.className = "actor-bubble";
+  bubble.textContent = text;
+  document.body.append(bubble);
+
+  const bRect = bubble.getBoundingClientRect();
+  const safeX = Math.max(10, Math.min(window.innerWidth - bRect.width - 15, x - bRect.width / 2));
+  const safeY = Math.max(10, y - bRect.height - 12);
+  bubble.style.left = safeX + "px";
+  bubble.style.top = safeY + "px";
+
+  bubbleTimeout = setTimeout(() => bubble.remove(), 3200);
+}
+
+function attachActorSpeech(id, actorKey) {
+  const el = $(id);
+  if (!el) return;
+  el.addEventListener("click", e => {
+    e.stopPropagation();
+    initAudio();
+    el.style.transform = (el.style.transform || "") + " scale(1.18)";
+    setTimeout(() => {
+      el.style.transform = (el.style.transform || "").replace(" scale(1.18)", "");
+    }, 180);
+    const r = el.getBoundingClientRect();
+    popActorSpeech(actorKey, r.left + r.width / 2, r.top);
+  });
+}
+
+// Entourage row characters
+attachActorSpeech("endHardy", "hardy");
+attachActorSpeech("endJake", "jake");
+attachActorSpeech("endBale", "bale");
+attachActorSpeech("endBatman", "batman");
+
+// Roaming background characters
+attachActorSpeech("actorJake", "jake");
+attachActorSpeech("actorHardy", "hardy");
+attachActorSpeech("actorBale", "bale");
+attachActorSpeech("actorBatman", "batman");
+
+// Screen 0 Hero Prop click interactions
+attachActorSpeech("propBale", "bale");
+attachActorSpeech("propHardy", "hardy");
+attachActorSpeech("propJake", "jake");
+attachActorSpeech("propBatman", "batman");
+
+if ($("propPopcorn")) {
+  $("propPopcorn").onclick = () => {
+    initAudio();
+    sfx("popcorn");
+    $("propPopcorn").style.transform = "scale(1.22) translateY(-6px)";
+    setTimeout(() => { $("propPopcorn").style.transform = ""; }, 180);
+  };
+}
+if ($("propOscar")) {
+  $("propOscar").onclick = () => {
+    initAudio();
+    sfx("powerup");
+    $("propOscar").style.transform = "scale(1.22) translateY(-6px)";
+    setTimeout(() => { $("propOscar").style.transform = ""; }, 180);
+  };
+}
+if ($("propSign")) {
+  $("propSign").onclick = () => {
+    initAudio();
+    sfx("blip");
+    $("propSign").style.transform = "scale(1.15) rotate(6deg)";
+    setTimeout(() => { $("propSign").style.transform = ""; }, 180);
+  };
+}
+
+// Sound Toggle
+$("soundToggle").onclick = () => {
+  soundEnabled = !soundEnabled;
+  $("soundToggle").textContent = soundEnabled ? "\u266a Sound: ON" : "\u266a Sound: OFF";
+  if (!soundEnabled && isBgmPlaying) {
+    stopBgm();
+  }
+};
+
+// Audio Controls (guarded)
+if ($("playAudioBtn")) $("playAudioBtn").onclick = toggleAudioPlayback;
+if ($("audioUploadTrigger")) $("audioUploadTrigger").onclick = () => $("audioPicker").click();
+if ($("audioPicker")) {
+  $("audioPicker").onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    const custom = $("customAudio");
+    custom.src = url;
+    stopBgm();
+    if ($("trackName")) $("trackName").textContent = `"${file.name.slice(0, 20)}..." (Voice Memo / Song)`;
+    toggleAudioPlayback();
+  };
+}
+
+if (CUSTOM_AUDIO_URL && $("customAudio")) {
+  $("customAudio").src = CUSTOM_AUDIO_URL;
+  if ($("trackName")) $("trackName").textContent = '"Our Movie Song"';
+}
+
+// End credits modal
+$("creditsBtn").onclick = () => {
+  initAudio();
+  sfx("popcorn");
+  $("creditsModal").classList.add("open");
+};
+$("closeCredits").onclick = () => {
+  sfx("blip");
+  $("creditsModal").classList.remove("open");
+};
+
+// Screen Interactions
+$("start").onclick = startHearts;
+$("lock").onclick = revealLetterAndAudio;
+$("again").onclick = () => {
+  clearTimeout(typing);
+  clearInterval(typing);
+  stopBgm();
+  blaster.active = false;
+  if (arcadeLoop) cancelAnimationFrame(arcadeLoop);
+  show("s0");
+  if ($("screen0Props")) $("screen0Props").style.display = "";
+  if ($("roamActors")) $("roamActors").style.display = "none";
+  $("hl").textContent = "For Sudeep";
+  setHR("");
+  setBar(38);
+};
+</script>
+</body>
+</html>
