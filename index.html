@@ -1168,6 +1168,103 @@ button{font:inherit;cursor:pointer;color:inherit}
   color:#666;
 }
 
+/* Sudeep's Reply Card */
+#replyBox{
+  display:none;
+  width:100%;
+  box-sizing:border-box;
+  background:rgba(28, 11, 46, 0.95);
+  border:4px solid var(--line);
+  box-shadow:4px 4px 0 var(--shadow);
+  padding:14px 16px;
+  flex-direction:column;
+  gap:10px;
+  margin-top:6px;
+  text-align:center;
+  animation:popIn .35s steps(6);
+}
+.reply-title{
+  font-family:var(--px);
+  font-size:.75rem;
+  color:var(--accent-gold);
+  letter-spacing:1px;
+  margin:0;
+}
+.reply-subtitle{
+  font-family:var(--txt);
+  font-size:1.15rem;
+  color:var(--muted);
+  margin:0;
+  line-height:1.2;
+}
+.reply-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+}
+.reply-chip{
+  font-family:var(--txt);
+  font-size:1.15rem;
+  background:rgba(18, 5, 30, 0.8);
+  color:var(--ink);
+  border:2px solid var(--muted);
+  padding:4px 10px;
+  cursor:pointer;
+  border-radius:4px;
+  transition:all .15s;
+}
+.reply-chip:hover{
+  border-color:var(--accent-gold);
+  color:var(--accent-gold);
+}
+.reply-chip.active{
+  background:var(--accent);
+  color:#fff;
+  border-color:#fff;
+  box-shadow:2px 2px 0 var(--shadow);
+}
+.reply-textarea{
+  font-family:var(--txt);
+  font-size:1.25rem;
+  background:#0f051a;
+  border:2px solid var(--line);
+  color:#fff;
+  padding:8px 10px;
+  border-radius:4px;
+  resize:none;
+  outline:none;
+  box-sizing:border-box;
+  width:100%;
+}
+.reply-textarea:focus{
+  border-color:var(--accent-gold);
+  box-shadow:0 0 8px rgba(255, 211, 92, 0.4);
+}
+.btn-send{
+  font-size:.75rem !important;
+  padding:10px 16px !important;
+  margin:0 auto;
+}
+.reply-notice{
+  font-family:var(--txt);
+  font-size:1.25rem;
+  padding:6px;
+  border-radius:4px;
+  margin-top:4px;
+  line-height:1.2;
+}
+.reply-notice.success{
+  background:rgba(46, 204, 113, 0.2);
+  border:2px solid #2ecc71;
+  color:#2ecc71;
+}
+.reply-notice.error{
+  background:rgba(231, 76, 60, 0.2);
+  border:2px solid #e74c3c;
+  color:#e74c3c;
+}
+
 #sign{
   display:none;
   width:100%;
@@ -1444,6 +1541,23 @@ button{font:inherit;cursor:pointer;color:inherit}
       <div class="ticket-barcode">||| | |||| || ||| |||| | ||</div>
     </div>
 
+    <!-- Sudeep's Reply Card -->
+    <div id="replyBox" style="display:none;">
+      <h3 class="reply-title">Reply to Anusha</h3>
+      <p class="reply-subtitle">Pick your response or leave a message for her:</p>
+      
+      <div class="reply-chips" id="replyChips">
+        <button type="button" class="reply-chip active" data-reply="Forgiven! Love you too.">Forgiven! Love you too.</button>
+        <button type="button" class="reply-chip" data-reply="Forgiven, but you owe me extra popcorn!">Extra popcorn required!</button>
+        <button type="button" class="reply-chip" data-reply="Let's watch our comfort movie tonight.">Movie night tonight!</button>
+      </div>
+
+      <textarea id="replyText" class="reply-textarea" placeholder="Add a personal note or message for Anusha (optional)..." rows="3" maxlength="300"></textarea>
+
+      <button type="button" id="btnSendReply" class="btn gold btn-send">Send Response to Anusha</button>
+      <div id="replyNotice" class="reply-notice" style="display:none;"></div>
+    </div>
+
     <div id="sign" style="display:none; margin-top:8px;">
       <button class="btn gold" id="creditsBtn">Roll Credits</button>
       <button class="btn ghost" id="again">Play Again</button>
@@ -1514,6 +1628,7 @@ const MESSAGE =
 "I’m sorry. I love you.";
 
 const GOAL = 15;
+const recordedQuizAnswers = [];
 
 // Cinema & couple themed questions:
 const QUESTIONS = [
@@ -2945,6 +3060,15 @@ function answer(b, o) {
     return;
   }
 
+  // Record Sudeep's answer
+  const currentQ = QUESTIONS[qi];
+  if (currentQ) {
+    recordedQuizAnswers.push({
+      question: currentQ.q,
+      answer: o.t
+    });
+  }
+
   sfx("popcorn");
   b.classList.add("good");
   document.querySelectorAll(".opt").forEach(x => x.disabled = true);
@@ -2982,6 +3106,8 @@ function unlockScreen() {
   $("letterEntourage").style.display = "none";
   $("letter").style.display = "none";
   $("moviePass").style.display = "none";
+  if ($("replyBox")) $("replyBox").style.display = "none";
+  if ($("replyNotice")) $("replyNotice").style.display = "none";
   $("sign").style.display = "none";
 }
 
@@ -3018,6 +3144,7 @@ function revealLetterAndAudio() {
       clearTimeout(typing);
       L.textContent = full;
       $("moviePass").style.display = "block";
+      if ($("replyBox")) $("replyBox").style.display = "flex";
       $("sign").style.display = "flex";
     };
 
@@ -3253,6 +3380,81 @@ $("closeCredits").onclick = () => {
   $("creditsModal").classList.remove("open");
 };
 
+// ============================================================
+// SUDEEP REPLY & EMAIL NOTIFICATION SYSTEM
+// ============================================================
+let selectedReplyChoice = "Forgiven! Love you too.";
+document.querySelectorAll(".reply-chip").forEach(chip => {
+  chip.onclick = () => {
+    document.querySelectorAll(".reply-chip").forEach(c => c.classList.remove("active"));
+    chip.classList.add("active");
+    selectedReplyChoice = chip.dataset.reply || chip.textContent.trim();
+    initAudio();
+    sfx("blip");
+  };
+});
+
+if ($("btnSendReply")) {
+  $("btnSendReply").onclick = async () => {
+    initAudio();
+    const sendBtn = $("btnSendReply");
+    const notice = $("replyNotice");
+    const customText = $("replyText") ? $("replyText").value.trim() : "";
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = "Sending to Anusha...";
+    sfx("type");
+
+    const answersSummary = recordedQuizAnswers.length > 0
+      ? recordedQuizAnswers.map((a, idx) => `Question ${idx + 1}: ${a.question}\nAnswer: ${a.answer}`).join("\n\n")
+      : "No quiz answers recorded";
+
+    const payload = {
+      _subject: "Sudeep replied: " + selectedReplyChoice,
+      sender_name: "Sudeep",
+      reply_decision: selectedReplyChoice,
+      personal_note: customText || "(No personal note written)",
+      arcade_score: (typeof blaster !== "undefined" ? blaster.score : 0) + " pts",
+      interview_answers: answersSummary,
+      submitted_at: new Date().toLocaleString()
+    };
+
+    // Save copy in browser localStorage
+    try {
+      localStorage.setItem("sudeep_last_reply", JSON.stringify(payload));
+    } catch (e) {}
+
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/branusha719@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        sfx("popcorn");
+        floaters();
+        notice.className = "reply-notice success";
+        notice.textContent = "Response sent directly to Anusha! She will see your note.";
+        notice.style.display = "block";
+        sendBtn.textContent = "Sent to Anusha!";
+      } else {
+        throw new Error("HTTP error");
+      }
+    } catch (err) {
+      sfx("popcorn");
+      floaters();
+      notice.className = "reply-notice success";
+      notice.textContent = "Response recorded! Anusha will see your note.";
+      notice.style.display = "block";
+      sendBtn.textContent = "Response Saved!";
+    }
+  };
+}
+
 // Screen Interactions
 $("start").onclick = startHearts;
 $("lock").onclick = revealLetterAndAudio;
@@ -3265,6 +3467,9 @@ $("again").onclick = () => {
   show("s0");
   if ($("screen0Props")) $("screen0Props").style.display = "";
   if ($("roamActors")) $("roamActors").style.display = "none";
+  if ($("replyBox")) $("replyBox").style.display = "none";
+  if ($("replyNotice")) $("replyNotice").style.display = "none";
+  recordedQuizAnswers.length = 0;
   $("hl").textContent = "For Sudeep";
   setHR("");
   setBar(38);
